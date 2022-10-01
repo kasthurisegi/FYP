@@ -2,68 +2,39 @@ import { View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity } 
 import React, {useState, useEffect} from 'react'
 import AntDesignIcon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      
-      <View style={styles.infoContainer}>
-        <View style={{padding: 0}}>
-            <Text style={{paddingTop: "10px", paddingVertical: 5, fontSize: 20, fontWeight:'800' , color:'#401F02'}}>Welcome to Roomarch</Text>
-        </View>
-
-        <View style={styles.searchIcon}>
-        <View style={{padding: 20}}>
-        <View>
-            <AntDesignIcon name={'search-plus'} size={50} style={{marginLeft: 50}}/>  
-            <Text style={{paddingTop: "10px", paddingVertical: 5, fontSize: 20, fontWeight:'800' , color:'#401F02', textAlign: 'center'}}>Welcome to Roomarch</Text>
-        </View> 
-        </View>
-        </View>
-
-        <View style={styles.searchcon}>
-        <View style={{padding: 20}}>
-        <View>
-            <AntDesignIcon name={'search-plus'} size={50} style={{marginLeft: 50}}/>  
-            <Text style={{paddingTop: "10px", paddingVertical: 5, fontSize: 20, fontWeight:'800' , color:'#401F02', textAlign: 'center'}}>Welcome to Roomarch</Text>
-        </View> 
-        </View>
-        </View>
-
+      <View style={styles.WelcomeContainer}>
+        <Text style={styles.WelcomeText}>Welcome to Roomarch</Text>
+        
       </View>
     </View>
+    /* <FontAwesome5 name='user-friends' size={35}/>
+        <MaterialIcons name='home' size={50}/> */
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
     flex: 1,
-    paddingTop: "50px"
+    paddingVertical: "30px"
   },
-
-  infoContainer: {
+  WelcomeContainer: {
     width: '100%',
-    height: '50%',
-    alignItems: 'center',
+    height: '30%',
     backgroundColor: '#F5C79F',
-    borderColor: '#401f02',
-    borderWidth: 1
+    alignItems: 'center',
+    paddingVertical: '15px'
   },
-
-  searchIcon: {
-    width: '50%',
-    height: '20%',
-    marginRight: '200px',
-        
-  },
-
-  searchcon: {
-    width: '50%',
-    height: '20%',
-    marginRight: '200px',
-    paddingTop: '60px'
-        
+  WelcomeText: {
+    fontSize: '24px',
+    fontWeight: 'bold'
   }
 
 });
