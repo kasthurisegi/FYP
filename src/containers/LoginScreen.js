@@ -15,7 +15,7 @@ const navigation = useNavigation();
         { isSignUp === false ?
         <View style={styles.subContainer}>
         <View style={{padding: 0}}>
-            <Text style={{paddingVertical: 5, fontSize: 20, fontWeight:'800' , color:'#401F02'}}>ROOMARCH</Text>
+            <Text style={{paddingVertical: 5, fontSize: 20, fontWeight:'800' , color:'#401F02'}}>Roomarch</Text>
           </View> 
           <View style={{padding: 0}}>
             <Text style={{paddingVertical: 5}}>Email:</Text>
