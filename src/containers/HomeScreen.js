@@ -12,7 +12,7 @@ const navigation = useNavigation();
   return (
 
 // welcome section
-    <View style={styles.scroll}>
+    
     <View style={styles.container}>
       <View style={styles.WelcomeContainer}>
         <Text style={styles.WelcomeText}>Welcome to Roomarch</Text>
@@ -22,42 +22,42 @@ const navigation = useNavigation();
             <Text style={styles.friendIconText}>You can find for roommate</Text>
           </View>
           <View style={styles.homeIcon}>
-            <MaterialIcons name='home' size={50}/>
-            <Text style={styles.homeIconText}>Look for available rooms</Text>
+            <MaterialIcons name='home' size={42}/>
+            <Text style={styles.homeIconText}>Search for available rooms</Text>
           </View>
         </View>
       </View>
 
 
 {/* roommate option */}
-      <Text style={styles.roommateText}>Find Roommate</Text>
-      <View style={styles.roommateOptionContainer}>
-          <Image style={styles.roommateimageContainer} source={require('../assets/room.jpg')}></Image>
-          <View style={{ flexDirection:"row", alignItems: 'center', paddingBottom: '30px', paddingLeft: '30px', paddingRight: '30px'}}>
-          <TouchableOpacity onPress={()=>navigation.navigate('RoommateViewPostScreen')} style={styles.roommateButtonView}>
-          <Text style={{color:'#FFFFFF'}}>View Post</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.roommateAddPostButton}>
-          <Text style={{color:'#FFFFFF'}}>Add Post</Text>
-          </TouchableOpacity>
-          </View>
-      </View>
+      
+        <Text style={styles.roommateText}>Find Roommate</Text>
+          <View style={styles.roommateOptionContainer}>
+              <Image style={styles.roommateimageContainer} source={require('../assets/room.jpg')}></Image>
+              <View style={{ flexDirection:"row", alignItems: 'center', paddingBottom: '30px', paddingLeft: '30px', paddingRight: '30px'}}>
+              <TouchableOpacity onPress={()=>navigation.navigate('RoommateViewPostScreen')} style={styles.roommateButtonView}>
+              <Text style={{color:'#FFFFFF'}}>View Post</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.roommateAddPostButton}>
+              <Text style={{color:'#FFFFFF'}}>Add Post</Text>
+              </TouchableOpacity>
+            </View>
+        </View>
 
 {/* room option */}
-      <Text style={styles.roomText}>Find Room</Text>
-      <View style={styles.roomOptionContainer}>
-          <Image style={styles.roomimageContainer} source={require('../assets/room.jpg')}></Image>
-          <View style={{ flexDirection:"row", alignItems: 'center', paddingBottom: '30px', paddingLeft: '30px', paddingRight: '30px'}}>
-          <TouchableOpacity onPress={()=>navigation.navigate('RoomViewPostScreen')} style={styles.roomButtonView}>
-          <Text style={{color:'#FFFFFF'}}>View Post</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.roomAddPostButton}>
-          <Text style={{color:'#FFFFFF'}}>Add Post</Text>
-          </TouchableOpacity>
-          </View>
+        <Text style={styles.roomText}>Find Room</Text>
+        <View style={styles.roomOptionContainer}>
+            <Image style={styles.roomimageContainer} source={require('../assets/room.jpg')}></Image>
+            <View style={{ flexDirection:"row", alignItems: 'center', paddingBottom: '30px', paddingLeft: '30px', paddingRight: '30px'}}>
+            <TouchableOpacity onPress={()=>navigation.navigate('RoomViewPostScreen')} style={styles.roomButtonView}>
+            <Text style={{color:'#FFFFFF'}}>View Post</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.roomAddPostButton}>
+            <Text style={{color:'#FFFFFF'}}>Add Post</Text>
+            </TouchableOpacity>
+            </View>
+        </View>
       </View>
-    </View>
-  </View>
   )
 }
 
@@ -65,6 +65,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
+    height: '100px',
+    overflow: 'scroll',
     paddingVertical: "30px",
     alignItems: 'center'
   },
@@ -73,11 +75,13 @@ const styles = StyleSheet.create({
 // welcome container
   WelcomeContainer: {
     width: '100%',
-    height: '35%',
+    height: '40%',
     backgroundColor: '#F5C79F',
     paddingVertical: '15px',
     borderColor: '#401F02',
-    borderWidth: '2px'
+    borderWidth: '2px',
+    borderLeftWidth: '0px',
+    borderRightWidth: '0px'
   },
   WelcomeText: {
     fontSize: '24px',
@@ -86,9 +90,10 @@ const styles = StyleSheet.create({
   },
   friendIcon: {
     flex: 1,
-    display: "flex",
+    display: "flex", 
     alignItems: 'center',
-    paddingVertical: '30px'
+    paddingVertical: '30px',
+    
   },
   friendIconText: {
     flex: 1,
@@ -98,7 +103,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     fontWeight: '700',
-    fontSize: '16px'
+    fontSize: '16px',
+    
   },
   homeIconText: {
     flex: 1,
@@ -108,15 +114,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     fontWeight: '700',
-    fontSize: '16px'
+    fontSize: '16px',
+    
+    
   },
   homeIcon: {
     flex: 1,
-    display: "flex",
+    display: "flex", 
     alignItems: 'center',
-    paddingVertical: '30px'
+    paddingVertical: '30px',
     
   },
+
 
 
 // option container (roommate)  
@@ -263,13 +272,6 @@ const styles = StyleSheet.create({
     shadowRadius: 6.68,
     elevation: 11,
   },
-
-
-// scroll
-    scroll: {
-      height: '100%',
-      overflow: 'scroll'
-    }
 
 });
 
