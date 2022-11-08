@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image,TouchableOpacity } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
-import { WhatsAppOutlined } from '@ant-design/icons';
+import { WhatsAppOutlined } from '@ant-design/icons'
 
 const RoommateViewPostScreen = () => {
 
@@ -21,14 +21,14 @@ const navigation = useNavigation();
         <View style={styles.profileDetailsContainer} >
           <View style={styles.topContainer} >
             <View style={styles.nameContainer}>
-                <Text style={{fontSize: '13px', fontWeight: "600"}}>Robert Fox</Text>
+                <Text style={{fontSize: '13px', fontWeight: "700"}}>Robert Fox</Text>
                   <View style={styles.ageContainer}>
                     <Text style={{fontSize: '12px'}}>31</Text>
                     <Text style={{fontSize: '12px'}}>,</Text>
                     <Text style={{fontSize: '12px'}}>Male</Text>
                   </View>
                   <View>
-                    <Text style={{fontSize: '12px'}}>City</Text>
+                    <Text style={{fontSize: '12px', fontWeight: "600"}}>City</Text>
                   </View>
             </View>
             <View style={styles.priceContainer}>
