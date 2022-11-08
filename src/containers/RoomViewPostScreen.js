@@ -24,10 +24,13 @@ const RoomViewPostScreen = () => {
   }
 
   return (
+
+   <View style={styles.mainContainer}>
+    <Text style={styles.RoomTitle}>Find Roommate</Text>
       <View style= {styles.displayContainer}>
         <View style= {styles.cardContainer}>
 
-          <SafeAreaView style= {styles.container}>
+          <SafeAreaView style= {styles.carouselContainer}>
               <View style= {styles.wrap}>
               <ScrollView
                 onScroll={({nativeEvent}) => onchange(nativeEvent)}
@@ -63,14 +66,14 @@ const RoomViewPostScreen = () => {
           </SafeAreaView>
 
         <View style={styles.detailsContainer}>
-        <View style={styles.profileImageContainer}>
+        <View style={styles.profilePictureContainer}>
           <Image resizeMode='cover' style={{aspectRatio: 1, width: '100%', borderWidth: '2px', borderRadius: '100%' }} source={require('../assets/room.jpg')}></Image>
           </View>
-        <View style={styles.profileDetailsContainer} >
-          <View style={styles.topContainer} >
-            <View style={styles.nameContainer}>
+        <View style={styles.profileInfoContainer} >
+          <View style={styles.upperContainer} >
+            <View style={styles.usernameContainer}>
                 <Text style={{fontSize: '13px', fontWeight: "700"}}>Robert Fox</Text>
-                  <View style={styles.ageContainer}>
+                  <View style={styles.userAgeContainer}>
                     <Text style={{fontSize: '12px'}}>31</Text>
                     <Text style={{fontSize: '12px'}}>,</Text>
                     <Text style={{fontSize: '12px'}}>Male</Text>
@@ -79,20 +82,20 @@ const RoomViewPostScreen = () => {
                     <Text style={{fontSize: '12px', fontWeight: "600"}}>City</Text>
                   </View>
             </View>
-            <View style={styles.priceContainer}>
+            <View style={styles.amountContainer}>
                 <Text style={{fontSize: '16px', fontWeight: "800"}}>RM100</Text>
                 <Text style={{fontSize: '10px'}}>/</Text>
                 <Text style={{fontSize: '10px'}}>Month</Text>
             </View>
           </View>
-          <View style={styles.bottomContainer}>
+          <View style={styles.belowContainer}>
           <Text style={{fontSize: '10px', paddingTop: '10px'}}> 
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. 
             Velit officia consequat duis enim velit mollit. 
             Exercitation veniam consequat.
           </Text>
           </View>
-          <View style={styles.buttonContainer}>
+          <View style={styles.btnContainer}>
             <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')}>
               <AntDesignIcon name={'hearto'} size={25} style={{}}/>
             </TouchableOpacity>
@@ -126,31 +129,43 @@ const RoomViewPostScreen = () => {
         </View> 
         </View>
       </View>
+      </View>
   )
 }
 
 const styles = StyleSheet.create({
 
-
-      displayContainer: {
+      mainContainer: {
         flex: 1,
         display: "flex",
         paddingVertical: "30px",
         alignItems: 'center',
       },
 
+      RoomTitle: {
+        fontSize: '24px',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        paddingBottom: '30px'
+      },
+      displayContainer: {
+        flex: 1,
+        display: "flex",
+        alignItems: 'center',
+      },
+
       cardContainer: {
           flexDirection: 'column',
           width: '90%',
-          height: '60%',
+          height: '70%',
           backgroundColor: '#FFEDDD',
           shadowRadius: '10px',
           borderRadius: '20px',
           padding: '10px',
       },
 
-      container: {
-        flex: 0.9,
+      carouselContainer: {
+        flex: 0.85,
         alignItems: 'center',
       },
 
@@ -177,37 +192,37 @@ const styles = StyleSheet.create({
         color: '#F3C296',
 
       },
-      profileImageContainer: {
+      profilePictureContainer: {
         flex: 0.25,
         paddingTop: '10px',
         paddingLeft: '10px',
       },
-      profileDetailsContainer: {
+      profileInfoContainer: {
         flex: 1,
         paddingTop: "15px",
         paddingBottom: "15px",
-        gap: 10,
+        gap: 15,
       },
   
-      topContainer:{
+      upperContainer:{
         flexDirection: "row",
         width: '100%',
         height: '30%',
       },
   
-      nameContainer:{
+      usernameContainer:{
         flexDirection: "column",
         width: '40%',
         height: '100%',
       },
   
-      ageContainer:{
+      userAgeContainer:{
         flexDirection: "row",
         width: '100%',
         height: '50%',
       },
   
-      priceContainer:{
+      amountContainer:{
         flexDirection: "row",
         width: '55%',
         height: '100%',
@@ -216,19 +231,18 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
       },
   
-      bottomContainer:{
+      belowContainer:{
         flexDirection: "row",
         width: '100%',
         height: '40%',
       },
   
-      buttonContainer:{
+      btnContainer:{
         flexDirection: "row",
         width: '100%',
         height: '30%',
         paddingTop: '5px',
         gap: 30,
-        backgroundColor:'red'
       },
 
       detailsContainer:{
