@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet, Image,TouchableOpacity } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native'
-import AntDesignIcon from 'react-native-vector-icons/AntDesign'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Entypo from 'react-native-vector-icons/Entypo'
 import { WhatsAppOutlined } from '@ant-design/icons'
 
 
@@ -15,36 +16,36 @@ const ProfileScreen = () => {
 
                 <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.editButton}>
                     <View style={styles.flexDirection}>
-                      <AntDesignIcon name={'hearto'} size={30} style={{}}/>
-                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>View Details</Text>
+                      <Ionicons name={'person'} size={25} style={{}}/>
+                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Edit Profile</Text>
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.policyButton}>
                     <View style={styles.flexDirection}>
-                      <AntDesignIcon name={'hearto'} size={30} style={{}}/>
-                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>View Details</Text>
+                      <Ionicons name={'shield-checkmark'} size={27} style={{}}/>
+                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Privacy Policy</Text>
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.termsButton}>
                     <View style={styles.flexDirection}>
-                      <AntDesignIcon name={'hearto'} size={30} style={{}}/>
-                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>View Details</Text>
+                      <Ionicons name={'information-circle'} size={30} style={{}}/>
+                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Terms & Conditions</Text>
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.deactivateAccount}>
                     <View style={styles.flexDirection}>
-                      <AntDesignIcon name={'hearto'} size={30} style={{}}/>
-                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>View Details</Text>
+                      <Entypo name={'remove-user'} size={25} style={{}}/>
+                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Deactivate Account</Text>
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={styles.logoutButton}>
                     <View style={styles.flexDirection}>
-                      <AntDesignIcon name={'hearto'} size={30} style={{}}/>
-                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>View Details</Text>
+                      <Ionicons name={'log-out-outline'} size={30} style={{}}/>
+                      <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>logout</Text>
                     </View>
                 </TouchableOpacity>
 
