@@ -26,7 +26,6 @@ const RoomViewPostScreen = () => {
   return (
 
    <View style={styles.mainContainer}>
-    <Text style={styles.RoomTitle}>Find Roommate</Text>
       <View style= {styles.displayContainer}>
         <View style= {styles.cardContainer}>
 
@@ -142,12 +141,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
 
-      RoomTitle: {
-        fontSize: '24px',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        paddingBottom: '30px'
-      },
       displayContainer: {
         flex: 1,
         display: "flex",

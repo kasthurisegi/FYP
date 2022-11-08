@@ -13,7 +13,6 @@ const navigation = useNavigation();
 
     
     <View style={styles.container}>
-      <Text style={styles.findRoommateTitle}>Find Roommate</Text>
       <View style={styles.roommateProfileContainer}>
         <View style={styles.profileImageContainer}>
           <Image resizeMode='cover' style={{aspectRatio: 1, width: '100%', borderWidth: '3.5px' }} source={require('../assets/room.jpg')}></Image>
@@ -87,13 +86,6 @@ const styles = StyleSheet.create({
         paddingVertical: "30px",
         alignItems: 'center',
       },
-    
-    findRoommateTitle: {
-        fontSize: '24px',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        paddingBottom: '30px'
-    },
 
     roommateProfileContainer: {
         flexDirection: 'row',

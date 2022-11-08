@@ -22,10 +22,46 @@ const Tab = createBottomTabNavigator();
 function HomeStack() {
   return (
       <Stack.Navigator >
-        {/* <Stack.Screen  name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
-        <Stack.Screen  name="HomeScreen" component={HomeScreen} options={{headerShown: false}}/> */}
-        {/* <Stack.Screen  name="RoommateViewPostScreen" component={RoommateViewPostScreen} options={{headerShown: false}}/> */}
-        <Stack.Screen  name="RoomViewPostScreen" component={RoomViewPostScreen} options={{headerShown: false}}/>
+        <Stack.Screen  
+          name="LoginScreen" 
+          component={LoginScreen} 
+          options={{headerShown: false}}/>
+
+        <Stack.Screen  
+          name="HomeScreen" 
+          component={HomeScreen} 
+          options={{headerShown: false}}/>
+
+        <Stack.Screen  
+          name="RoommateViewPostScreen" 
+          component={RoommateViewPostScreen} 
+          options={{title: 'Find Roommate',
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                      backgroundColor: '#D6B598',
+                    },
+                    headerTintColor: '#000000',
+                    headerTitleStyle: {
+                      fontSize: '24px',
+                      fontWeight: 'bold',
+                    },
+                    }}/>
+
+        <Stack.Screen  
+        name="RoomViewPostScreen" 
+        component={RoomViewPostScreen} 
+        options={{title: 'Find Room',
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#D6B598',
+                  },
+                  headerTintColor: '#000000',
+                  headerTitleStyle: {
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                  },
+                  }}/>
+
       </Stack.Navigator>
     
   );
@@ -33,7 +69,20 @@ function HomeStack() {
 function FavouriteStack() {
   return (
       <Stack.Navigator >
-        <Stack.Screen  name="FavouriteScreen" component={FavouriteScreen} options={{headerShown: false}}/>
+        <Stack.Screen  
+        name="FavouriteScreen" 
+        component={FavouriteScreen} 
+        options={{title: 'Favourite', 
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#D6B598',
+                  },
+                  headerTintColor: '#000000',
+                  headerTitleStyle: {
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                  }, 
+                  }}/>
       </Stack.Navigator>
     
   );
@@ -41,7 +90,20 @@ function FavouriteStack() {
 function ProfileStack() {
   return (
       <Stack.Navigator >
-        <Stack.Screen  name="ProfileScreen" component={ProfileScreen} options={{headerShown: false}}/>
+        <Stack.Screen  
+        name="ProfileScreen" 
+        component={ProfileScreen} 
+        options={{title: 'Profile', 
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#D6B598',
+                  },
+                  headerTintColor: '#000000',
+                  headerTitleStyle: {
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                  }, 
+                  }}/>
       </Stack.Navigator>
     
   );
@@ -78,9 +140,10 @@ export default function App() {
           
         })}
       >
+        <Tab.Screen name="Profile" component={ProfileStack} />
         <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Favourite" component={FavouriteStack} />
-        <Tab.Screen name="Profile" component={ProfileStack} />
+        
       </Tab.Navigator>
     </NavigationContainer>
   );
