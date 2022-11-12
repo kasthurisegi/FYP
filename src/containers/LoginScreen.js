@@ -2,10 +2,33 @@ import { View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity } 
 import React, {useState, useEffect} from 'react'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../FirebaseConfig';
 
 const LoginScreen = () => {
 
 const [isSignUp, setIsSignUp] = useState (false);
+
+const [signInEmail, setSignInEmail] = useState("");
+const [signInPassword, setSignInPassword] = useState("");
+const [errMessage, setErrMessage] = useState("");
+
+function SignIn() {
+
+    signInWithEmailAndPassword(auth, signInEmail, signInPassword)
+      .then((userCredential) => {
+        console.log('Signed In')
+      })
+      .catch((error) => {
+        const err = error.message;
+        const one = err.replace('Firebase: Error', '')
+        const two = one.replace('(auth/', '')
+        const three = two.replace(').', '')
+        const newErr = three.replace('-', ' ')
+        setErrMessage(newErr)
+      });
+
+}
 
 const navigation = useNavigation();
 
@@ -19,16 +42,17 @@ const navigation = useNavigation();
           </View> 
           <View style={{padding: 0}}>
             <Text style={{paddingVertical: 5}}>Email:</Text>
-            <TextInput style={styles.textInput}></TextInput>
+            <TextInput style={styles.textInput} onChangeText={setSignInEmail}></TextInput>
           </View>
           <View style={{padding: 0}}>
             <Text style={{paddingVertical: 5}}>Password:</Text>
-            <TextInput style={styles.textInput} textContentType='password'></TextInput>
+            <TextInput style={styles.textInput} secureTextEntry={true} onChangeText={setSignInPassword}></TextInput>
           </View>
+          {errMessage !== "" && <Text>{errMessage}</Text>}
           <View style={{padding: 0}}>
-            <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={{
-              width: 100, 
-              height: 35, 
+            <TouchableOpacity onPress={()=> SignIn() } style={{
+              width: 100,
+              height: 35,
               borderWidth: 1, 
               alignItems: 'center', 
               justifyContent: 'center',

@@ -3,8 +3,8 @@
   "expoServerPort": null,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://5b-mzr.anonymous.fyp.exp.direct",
+  "packagerNgrokUrl": "https://5b-mzr.anonymous.fyp.exp.direct",
+  "ngrokPid": 6593,
   "devToolsPort": 19002
 }
