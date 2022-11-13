@@ -143,9 +143,10 @@ const { loginState } = useContext(UserInfoContext);
             
             })}
         >
+                <Tab.Screen name="Favourite" component={FavouriteStack} />
                 <Tab.Screen name="Profile" component={ProfileStack} />
                 <Tab.Screen name="Home" component={HomeStack} />
-                <Tab.Screen name="Favourite" component={FavouriteStack} />
+                
             
         </Tab.Navigator>
         :
