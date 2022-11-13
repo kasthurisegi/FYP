@@ -51,6 +51,7 @@ function SignUp() {
 
 const navigation = useNavigation();
 
+// Sign in page
   return (
     <View style={styles.container}>
       <ImageBackground style={styles.imageContainer} source={require('../assets/SigninBackground.jpg')}>
@@ -69,25 +70,7 @@ const navigation = useNavigation();
           </View>
           {errMessage !== "" && <Text>{errMessage}</Text>}
           <View style={{padding: 0}}>
-            <TouchableOpacity onPress={()=> SignIn() } style={{
-              width: 100,
-              height: 35,
-              borderWidth: 1, 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              backgroundColor: '#401F02',
-              borderWidth: 1.5,
-              borderColor: '#FFFFFF',
-              borderRadius: 10,
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 5,
-              },
-              shadowOpacity: 0.36,
-              shadowRadius: 6.68,
-              elevation: 11,
-            }}>
+            <TouchableOpacity style={styles.signInButton} onPress={()=> SignIn() } >
               <Text style={{color:'#FFFFFF'}}>Sign In</Text>
             </TouchableOpacity>
           </View>
@@ -105,7 +88,11 @@ const navigation = useNavigation();
             </TouchableOpacity>
           </View>
         </View>
+
+
         :
+
+// sign up page
         <View style={styles.signUpContainer}>
           <View style={{height: '10%', width: '100%', flexDirection: 'row', alignItems: 'center'}}>
             <View style={{width: '40%'}}>
@@ -151,25 +138,7 @@ const navigation = useNavigation();
               <TextInput style={styles.textInput} textContentType='password'></TextInput>
             </View>
             <View style={{padding: 15}}>
-              <TouchableOpacity style={{
-                width: 100, 
-                height: 35, 
-                borderWidth: 1, 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                backgroundColor: '#401F02',
-                borderWidth: 1.5,
-                borderColor: '#FFFFFF',
-                borderRadius: 10,
-                shadowColor: "#000",
-                shadowOffset: {
-                  width: 0,
-                  height: 5,
-                },
-                shadowOpacity: 0.36,
-                shadowRadius: 6.68,
-                elevation: 11,
-                }} onPress={() => { SignUp() }}>
+              <TouchableOpacity style={styles.signUpButton} onPress={() => { SignUp() }}>
                 <Text style={{color:'#FFFFFF'}}>Sign Up</Text>
               </TouchableOpacity>
               {registerErrorMessage !== "" && <Text>{registerErrorMessage}</Text>}
@@ -201,6 +170,46 @@ const styles = StyleSheet.create({
     borderColor: '#401f02',
     borderWidth: 1,
     borderRadius: 15
+  },
+
+  signInButton: {
+    width: 100,
+    height: 35,
+    borderWidth: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center',
+    backgroundColor: '#401F02',
+    borderWidth: 1.5,
+    borderColor: '#FFFFFF',
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    elevation: 11,
+  },
+
+  signUpButton: {
+    width: 100, 
+    height: 35, 
+    borderWidth: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center',
+    backgroundColor: '#401F02',
+    borderWidth: 1.5,
+    borderColor: '#FFFFFF',
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    elevation: 11,
   },
 
   signUpContainer: {
