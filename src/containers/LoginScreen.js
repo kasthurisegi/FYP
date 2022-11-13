@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity } 
 import React, {useState, useEffect} from 'react'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../FirebaseConfig';
 
 const LoginScreen = () => {
@@ -12,6 +12,10 @@ const [isSignUp, setIsSignUp] = useState (false);
 const [signInEmail, setSignInEmail] = useState("");
 const [signInPassword, setSignInPassword] = useState("");
 const [errMessage, setErrMessage] = useState("");
+const [registerErrorMessage, setRegisterErrorMessage] = useState("");
+
+const [signUpEmail, setSignUpEmail] = useState('');
+const [signUpPassword, setSignUpPassword] = useState('');
 
 function SignIn() {
 
@@ -28,6 +32,21 @@ function SignIn() {
         setErrMessage(newErr)
       });
 
+}
+
+function SignUp() {
+  createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+  .then((userCredential) => {
+    console.log('Signed Up')
+  })
+  .catch((error) => {
+    const err = error.message;
+    const one = err.replace('Firebase: Error', '')
+    const two = one.replace('(auth/', '')
+    const three = two.replace(').', '')
+    const newErr = three.replace('-', ' ')
+    setRegisterErrorMessage(newErr)
+  });
 }
 
 const navigation = useNavigation();
@@ -101,11 +120,11 @@ const navigation = useNavigation();
           <View style={{height: '90%', alignItems: 'center', justifyContent: 'space-evenly'}}>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Name:</Text>
-              <TextInput style={styles.textInput} placeholder='Enter Your Name...'></TextInput>
+              <TextInput style={styles.textInput}></TextInput>
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Date Of Birth:</Text>
-              <TextInput style={styles.textInput}placeholder='Select Your Age' ></TextInput>
+              <TextInput style={styles.textInput}></TextInput>
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Gender:</Text>
@@ -117,7 +136,7 @@ const navigation = useNavigation();
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Email:</Text>
-              <TextInput style={styles.textInput} keyboardType='email-address'></TextInput>
+              <TextInput style={styles.textInput} keyboardType='email-address' onChangeText={setSignUpEmail}></TextInput>
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Phone No:</Text>
@@ -125,7 +144,7 @@ const navigation = useNavigation();
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Password:</Text>
-              <TextInput style={styles.textInput} textContentType='password'></TextInput>
+              <TextInput style={styles.textInput} textContentType='password' onChangeText={setSignUpPassword}></TextInput>
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Confirm Password:</Text>
@@ -150,9 +169,10 @@ const navigation = useNavigation();
                 shadowOpacity: 0.36,
                 shadowRadius: 6.68,
                 elevation: 11,
-                }}>
+                }} onPress={() => { SignUp() }}>
                 <Text style={{color:'#FFFFFF'}}>Sign Up</Text>
               </TouchableOpacity>
+              {registerErrorMessage !== "" && <Text>{registerErrorMessage}</Text>}
           </View>
           </View>
         </View>
