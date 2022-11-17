@@ -35,10 +35,10 @@ const navigation = useNavigation();
           <View style={styles.roommateOptionContainer}>
               <Image style={styles.roommateimageContainer} source={require('../assets/room.jpg')}></Image>
               <View style={{ flexDirection:"row", alignItems: 'center', paddingBottom: '30px', paddingLeft: '30px', paddingRight: '30px'}}>
-              <TouchableOpacity onPress={()=>navigation.navigate('RoommateViewPostScreen')} style={styles.roommateButtonView}>
+              <TouchableOpacity style={styles.roommateButtonView} onPress={()=>navigation.navigate('RoommateViewPostScreen')} >
               <Text style={{color:'#FFFFFF'}}>View Post</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.roommateAddPostButton}>
+              <TouchableOpacity style={styles.roommateAddPostButton} onPress={()=>navigation.navigate('AddRoommateScreen')}>
               <Text style={{color:'#FFFFFF'}}>Add Post</Text>
               </TouchableOpacity>
             </View>
@@ -49,10 +49,10 @@ const navigation = useNavigation();
         <View style={styles.roomOptionContainer}>
             <Image style={styles.roomimageContainer} source={require('../assets/room.jpg')}></Image>
             <View style={{ flexDirection:"row", alignItems: 'center', paddingBottom: '30px', paddingLeft: '30px', paddingRight: '30px'}}>
-            <TouchableOpacity onPress={()=>navigation.navigate('RoomViewPostScreen')} style={styles.roomButtonView}>
+            <TouchableOpacity style={styles.roomButtonView} onPress={()=>navigation.navigate('RoomViewPostScreen')} >
             <Text style={{color:'#FFFFFF'}}>View Post</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.roomAddPostButton}>
+            <TouchableOpacity style={styles.roomAddPostButton} onPress={()=>navigation.navigate('AddRoomScreen')}>
             <Text style={{color:'#FFFFFF'}}>Add Post</Text>
             </TouchableOpacity>
             </View>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     display: "flex",
     height: '100px',
     overflow: 'scroll',
-    paddingVertical: "30px",
+    paddingBottom: '30px',
     alignItems: 'center'
   },
 

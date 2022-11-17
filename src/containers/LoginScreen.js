@@ -4,10 +4,14 @@ import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../FirebaseConfig';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const LoginScreen = () => {
 
 const [isSignUp, setIsSignUp] = useState (false);
+
+const [selectedDate, setSelectedDate] = useState("");
 
 const [signInEmail, setSignInEmail] = useState("");
 const [signInPassword, setSignInPassword] = useState("");
@@ -51,7 +55,7 @@ function SignUp() {
 
 const navigation = useNavigation();
 
-// Sign in page
+////// Sign in page //////
   return (
     <View style={styles.container}>
       <ImageBackground style={styles.imageContainer} source={require('../assets/SigninBackground.jpg')}>
@@ -92,7 +96,7 @@ const navigation = useNavigation();
 
         :
 
-// sign up page
+////// sign up page //////
         <View style={styles.signUpContainer}>
           <View style={{height: '10%', width: '100%', flexDirection: 'row', alignItems: 'center'}}>
             <View style={{width: '40%'}}>
@@ -100,8 +104,8 @@ const navigation = useNavigation();
               <AntDesignIcon name={'arrowleft'} size={25} style={{paddingLeft: 5}}/>
               </TouchableOpacity>
             </View>
-            <View style={{width: '90%'}}>
-              <Text style={{ fontWeight:'bold'}}>Sign Up</Text>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{fontWeight:'bold', fontSize:'20px'}}>Sign Up</Text>
             </View>
           </View>
           <View style={{height: '90%', alignItems: 'center', justifyContent: 'space-evenly'}}>
@@ -109,9 +113,15 @@ const navigation = useNavigation();
               <Text style={{paddingVertical: 5}}>Name:</Text>
               <TextInput style={styles.textInput}></TextInput>
             </View>
-            <View style={{padding: 0}}>
+            <View style={{zIndex: 999}}>
               <Text style={{paddingVertical: 5}}>Date Of Birth:</Text>
-              <TextInput style={styles.textInput}></TextInput>
+              <DatePicker selected={selectedDate} 
+                          onChange={(date) => setSelectedDate(date)}
+                          dateFormat="dd/MM/yyyy" 
+                          maxDate={new Date()} 
+                          showYearDropdown
+                          showMonthDropdown
+                          />
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Gender:</Text>
@@ -131,11 +141,11 @@ const navigation = useNavigation();
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Password:</Text>
-              <TextInput style={styles.textInput} textContentType='password' onChangeText={setSignUpPassword}></TextInput>
+              <TextInput style={styles.textInput} secureTextEntry={true} onChangeText={setSignUpPassword}></TextInput>
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Confirm Password:</Text>
-              <TextInput style={styles.textInput} textContentType='password'></TextInput>
+              <TextInput style={styles.textInput} secureTextEntry={true}></TextInput>
             </View>
             <View style={{padding: 15}}>
               <TouchableOpacity style={styles.signUpButton} onPress={() => { SignUp() }}>
@@ -214,7 +224,7 @@ const styles = StyleSheet.create({
 
   signUpContainer: {
     width: '70%',
-    height: '70%',
+    height: '90%',
     alignItems: "center",
     justifyContent: 'space-evenly',
     backgroundColor: '#FFEDDD',
@@ -227,8 +237,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#401F02',
     paddingLeft: 5,
-    borderRadius: 5,
-    height: 25
+    backgroundColor: 'white',
+    height: 21
   }
 });
 

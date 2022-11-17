@@ -55,7 +55,7 @@ const ProfileScreen = () => {
             <TouchableOpacity onPress={()=>  handleLogin() } style={styles.logoutButton}>
                 <View style={styles.flexDirection}>
                   <Ionicons name={'log-out-outline'} size={30} style={{}}/>
-                  <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>logout</Text>
+                  <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Logout</Text>
                 </View>
             </TouchableOpacity>
 

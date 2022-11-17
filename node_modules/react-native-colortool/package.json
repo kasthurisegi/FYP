@@ -1,0 +1,23 @@
+{
+  "name": "react-native-colortool",
+  "version": "0.0.1",
+  "description": "provide the basic operation of colors",
+  "main": "color.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lulutia/react-native-colortool.git"
+  },
+  "keywords": [
+    "react-native",
+    "color"
+  ],
+  "author": "lulutia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lulutia/react-native-colortool/issues"
+  },
+  "homepage": "https://github.com/lulutia/react-native-colortool#readme"
+}

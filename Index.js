@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import LoginScreen from './src/containers/LoginScreen';
 import HomeScreen from './src/containers/HomeScreen';
+import AddRoommateScreen from './src/containers/AddRoommateScreen';
+import AddRoomScreen from './src/containers/AddRoomScreen';
 import RoommateViewPostScreen from './src/containers/RoommateViewPostScreen';
 import RoomViewPostScreen from './src/containers/RoomViewPostScreen';
 import FavouriteScreen from './src/containers/FavouriteScreen';
@@ -61,6 +63,36 @@ function HomeStack() {
                     fontWeight: 'bold',
                   },
                   }}/>
+
+        <Stack.Screen  
+        name="AddRoommateScreen" 
+        component={AddRoommateScreen} 
+        options={{title: 'Add Post',
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#D6B598',
+                  },
+                  headerTintColor: '#000000',
+                  headerTitleStyle: {
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    },
+                    }}/>
+
+        <Stack.Screen  
+        name="AddRoomScreen" 
+        component={AddRoomScreen} 
+        options={{title: 'Add Post',
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#D6B598',
+                  },
+                  headerTintColor: '#000000',
+                  headerTitleStyle: {
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    },
+                    }}/>
 
       </Stack.Navigator>
     
@@ -144,8 +176,8 @@ const { loginState } = useContext(UserInfoContext);
             })}
         >
                 <Tab.Screen name="Favourite" component={FavouriteStack} />
-                <Tab.Screen name="Profile" component={ProfileStack} />
                 <Tab.Screen name="Home" component={HomeStack} />
+                <Tab.Screen name="Profile" component={ProfileStack} />
                 
             
         </Tab.Navigator>

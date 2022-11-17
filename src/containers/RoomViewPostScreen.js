@@ -96,30 +96,12 @@ const RoomViewPostScreen = () => {
           </View>
           <View style={styles.btnContainer}>
             <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')}>
-              <AntDesignIcon name={'hearto'} size={25} style={{}}/>
+              <AntDesignIcon name={'hearto'} size={30} style={{}}/>
             </TouchableOpacity>
             <TouchableOpacity>
-              <WhatsAppOutlined style={{ fontSize: '25px', color: '#25D366' }}/>
+              <WhatsAppOutlined style={{ fontSize: '30px', color: '#25D366' }}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} style={{
-              width: 100, 
-              height: 30, 
-              borderWidth: 1, 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              backgroundColor: '#401F02',
-              borderWidth: 1.5,
-              borderColor: '#FFFFFF',
-              borderRadius: 10,
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 5,
-              },
-              shadowOpacity: 0.36,
-              shadowRadius: 6.68,
-              elevation: 11,
-            }}>
+            <TouchableOpacity style={styles.btnViewDetails} onPress={()=>navigation.navigate('HomeScreen')} >
               <Text style={{color:'#FFFFFF'}}>View Details</Text>
             </TouchableOpacity>
 
@@ -243,6 +225,26 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '40%',
         gap: 10,
+      },
+
+      btnViewDetails:{
+        width: 100, 
+        height: 35, 
+        borderWidth: 1, 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        backgroundColor: '#401F02',
+        borderWidth: 1.5,
+        borderColor: '#FFFFFF',
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 6.68,
+        elevation: 11,
       },
   }
 )
