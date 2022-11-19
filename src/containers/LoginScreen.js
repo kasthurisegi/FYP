@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
@@ -6,8 +6,73 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "fire
 import { auth } from '../../FirebaseConfig';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import DropDownPicker from 'react-native-dropdown-picker';
+
 
 const LoginScreen = () => {
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Male', value: 'Male'},
+    {label: 'Female', value: 'Female'}
+  ]);
+
+  const [openNum, setOpenNum] = useState(false);
+  const [valueNum, setValueNum] = useState(null);
+  const [itemsNum, setItemsNum] = useState([
+    {label: '1', value: '1'},
+    {label: '2', value: '2'},
+    {label: '3', value: '3'},
+    {label: '4', value: '4'},
+    {label: '5', value: '5'},
+    {label: '6', value: '6'},
+    {label: '7', value: '7'},
+    {label: '8', value: '8'},
+    {label: '9', value: '9'},
+    {label: '10', value: '10'},
+    {label: '11', value: '11'},
+    {label: '12', value: '12'},
+    {label: '13', value: '13'},
+    {label: '14', value: '14'},
+    {label: '15', value: '15'},
+    {label: '16', value: '16'},
+    {label: '17', value: '17'},
+    {label: '18', value: '18'},
+    {label: '19', value: '19'},
+    {label: '20', value: '20'},
+    {label: '31', value: '31'},
+    {label: '32', value: '32'},
+    {label: '33', value: '33'},
+    {label: '34', value: '34'},
+    {label: '35', value: '35'},
+    {label: '36', value: '36'},
+    {label: '37', value: '37'},
+    {label: '38', value: '38'},
+    {label: '39', value: '39'},
+    {label: '40', value: '40'},
+    {label: '41', value: '41'},
+    {label: '42', value: '42'},
+    {label: '43', value: '43'},
+    {label: '44', value: '44'},
+    {label: '45', value: '45'},
+    {label: '46', value: '46'},
+    {label: '47', value: '47'},
+    {label: '48', value: '48'},
+    {label: '49', value: '49'},
+    {label: '50', value: '50'},
+    {label: '51', value: '51'},
+    {label: '52', value: '52'},
+    {label: '53', value: '53'},
+    {label: '54', value: '54'},
+    {label: '55', value: '55'},
+    {label: '56', value: '56'},
+    {label: '57', value: '57'},
+    {label: '58', value: '58'},
+    {label: '59', value: '59'},
+    {label: '60', value: '60'},
+    
+  ]);
 
 const [isSignUp, setIsSignUp] = useState (false);
 
@@ -20,6 +85,8 @@ const [registerErrorMessage, setRegisterErrorMessage] = useState("");
 
 const [signUpEmail, setSignUpEmail] = useState('');
 const [signUpPassword, setSignUpPassword] = useState('');
+
+const navigation = useNavigation();
 
 function SignIn() {
 
@@ -53,7 +120,7 @@ function SignUp() {
   });
 }
 
-const navigation = useNavigation();
+
 
 ////// Sign in page //////
   return (
@@ -123,13 +190,37 @@ const navigation = useNavigation();
                           showMonthDropdown
                           />
             </View>
-            <View style={{padding: 0}}>
-              <Text style={{paddingVertical: 5}}>Gender:</Text>
-              <TextInput style={styles.textInput}></TextInput>
-            </View>
-            <View style={{padding: 0}}>
-              <Text style={{paddingVertical: 5}}>Age:</Text>
-              <TextInput style={styles.textInput}></TextInput>
+            <View style={{flexDirection: 'row', gap: 1, zIndex: 999}}>
+                <View>
+                  <Text style={{paddingVertical: 5}}>Gender:</Text>
+                  <DropDownPicker style={{
+                                  backgroundColor: "white",
+                                  borderWidth: 1,
+                                  borderColor: '#401F02'
+                                  }}
+                                  open={open}
+                                  value={value}
+                                  items={items}
+                                  setOpen={setOpen}
+                                  setValue={setValue}
+                                  setItems={setItems}
+                                  />
+                </View>
+                <View style={{padding: 0}}>
+                  <Text style={{paddingVertical: 5}}>Age:</Text>
+                  <DropDownPicker style={{
+                                  backgroundColor: "white",
+                                  borderWidth: 1,
+                                  borderColor: '#401F02'
+                                  }}
+                                  open={openNum}
+                                  value={valueNum}
+                                  items={itemsNum}
+                                  setOpen={setOpenNum}
+                                  setValue={setValueNum}
+                                  setItems={setItemsNum}
+                                  />
+                </View>
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Email:</Text>
