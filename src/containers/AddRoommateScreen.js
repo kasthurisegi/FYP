@@ -4,13 +4,11 @@ import React from 'react'
 const AddRoommateScreen = () => {
   return (
     <View>
-      <Text>AddRoommateScreen</Text>
+      <Text>AddRoomScreen</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({})
 
-
 export default AddRoommateScreen
-

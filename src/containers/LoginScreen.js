@@ -7,9 +7,11 @@ import { auth } from '../../FirebaseConfig';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DropDownPicker from 'react-native-dropdown-picker';
-
+import moment from 'moment';
 
 const LoginScreen = () => {
+
+  const navigation = useNavigation();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -18,92 +20,44 @@ const LoginScreen = () => {
     {label: 'Female', value: 'Female'}
   ]);
 
-  const [openNum, setOpenNum] = useState(false);
-  const [valueNum, setValueNum] = useState(null);
-  const [itemsNum, setItemsNum] = useState([
-    {label: '1', value: '1'},
-    {label: '2', value: '2'},
-    {label: '3', value: '3'},
-    {label: '4', value: '4'},
-    {label: '5', value: '5'},
-    {label: '6', value: '6'},
-    {label: '7', value: '7'},
-    {label: '8', value: '8'},
-    {label: '9', value: '9'},
-    {label: '10', value: '10'},
-    {label: '11', value: '11'},
-    {label: '12', value: '12'},
-    {label: '13', value: '13'},
-    {label: '14', value: '14'},
-    {label: '15', value: '15'},
-    {label: '16', value: '16'},
-    {label: '17', value: '17'},
-    {label: '18', value: '18'},
-    {label: '19', value: '19'},
-    {label: '20', value: '20'},
-    {label: '31', value: '31'},
-    {label: '32', value: '32'},
-    {label: '33', value: '33'},
-    {label: '34', value: '34'},
-    {label: '35', value: '35'},
-    {label: '36', value: '36'},
-    {label: '37', value: '37'},
-    {label: '38', value: '38'},
-    {label: '39', value: '39'},
-    {label: '40', value: '40'},
-    {label: '41', value: '41'},
-    {label: '42', value: '42'},
-    {label: '43', value: '43'},
-    {label: '44', value: '44'},
-    {label: '45', value: '45'},
-    {label: '46', value: '46'},
-    {label: '47', value: '47'},
-    {label: '48', value: '48'},
-    {label: '49', value: '49'},
-    {label: '50', value: '50'},
-    {label: '51', value: '51'},
-    {label: '52', value: '52'},
-    {label: '53', value: '53'},
-    {label: '54', value: '54'},
-    {label: '55', value: '55'},
-    {label: '56', value: '56'},
-    {label: '57', value: '57'},
-    {label: '58', value: '58'},
-    {label: '59', value: '59'},
-    {label: '60', value: '60'},
+  const [selectedDate, setSelectedDate] = useState("");
+
+  const [age, setAge] = useState("")
+
+  function handleDateChange(date) {setSelectedDate(date);
+
+    var currentYear = moment().format("YYYY")
+    var userBirthYear = moment(date).format("YYYY")
+    var age = Math.abs(currentYear - userBirthYear)
     
-  ]);
+    setAge(age)
+  }
+
+
+  const [signInEmail, setSignInEmail] = useState("");
+  const [signInPassword, setSignInPassword] = useState("");
+  const [errMessage, setErrMessage] = useState("");
+  const [registerErrorMessage, setRegisterErrorMessage] = useState("");
+
+  function SignIn() {
+
+      signInWithEmailAndPassword(auth, signInEmail, signInPassword)
+        .then((userCredential) => {
+          console.log('Signed In')
+        })
+        .catch((error) => {
+          const err = error.message;
+          const one = err.replace('Firebase: Error', '')
+          const two = one.replace('(auth/', '')
+          const three = two.replace(').', '')
+          const newErr = three.replace('-', ' ')
+          setErrMessage(newErr)
+        });
+  }
 
 const [isSignUp, setIsSignUp] = useState (false);
-
-const [selectedDate, setSelectedDate] = useState("");
-
-const [signInEmail, setSignInEmail] = useState("");
-const [signInPassword, setSignInPassword] = useState("");
-const [errMessage, setErrMessage] = useState("");
-const [registerErrorMessage, setRegisterErrorMessage] = useState("");
-
 const [signUpEmail, setSignUpEmail] = useState('');
 const [signUpPassword, setSignUpPassword] = useState('');
-
-const navigation = useNavigation();
-
-function SignIn() {
-
-    signInWithEmailAndPassword(auth, signInEmail, signInPassword)
-      .then((userCredential) => {
-        console.log('Signed In')
-      })
-      .catch((error) => {
-        const err = error.message;
-        const one = err.replace('Firebase: Error', '')
-        const two = one.replace('(auth/', '')
-        const three = two.replace(').', '')
-        const newErr = three.replace('-', ' ')
-        setErrMessage(newErr)
-      });
-
-}
 
 function SignUp() {
   createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
@@ -180,45 +134,32 @@ function SignUp() {
               <Text style={{paddingVertical: 5}}>Name:</Text>
               <TextInput style={styles.textInput}></TextInput>
             </View>
-            <View style={{zIndex: 999}}>
+            <View style={{zIndex: 1000}}>
               <Text style={{paddingVertical: 5}}>Date Of Birth:</Text>
-              <DatePicker selected={selectedDate} 
-                          onChange={(date) => setSelectedDate(date)}
+              <DatePicker style={styles.textInputDob}
+                          selected={selectedDate} 
+                          onChange={(date) => handleDateChange(date)}
                           dateFormat="dd/MM/yyyy" 
                           maxDate={new Date()} 
                           showYearDropdown
                           showMonthDropdown
                           />
             </View>
-            <View style={{flexDirection: 'row', gap: 1, zIndex: 999}}>
+            <View style={{flexDirection: 'row', gap: 10, zIndex: 999}}>
+                <View style={{padding: 0}}>
+                  <Text style={{paddingVertical: 5}}>Age:</Text>
+                  <Text style={styles.textInputAge}>{age ? age : 0}</Text>
+                </View>
+
                 <View>
                   <Text style={{paddingVertical: 5}}>Gender:</Text>
-                  <DropDownPicker style={{
-                                  backgroundColor: "white",
-                                  borderWidth: 1,
-                                  borderColor: '#401F02'
-                                  }}
+                  <DropDownPicker style={styles.textInputGender}
                                   open={open}
                                   value={value}
                                   items={items}
                                   setOpen={setOpen}
                                   setValue={setValue}
                                   setItems={setItems}
-                                  />
-                </View>
-                <View style={{padding: 0}}>
-                  <Text style={{paddingVertical: 5}}>Age:</Text>
-                  <DropDownPicker style={{
-                                  backgroundColor: "white",
-                                  borderWidth: 1,
-                                  borderColor: '#401F02'
-                                  }}
-                                  open={openNum}
-                                  value={valueNum}
-                                  items={itemsNum}
-                                  setOpen={setOpenNum}
-                                  setValue={setValueNum}
-                                  setItems={setItemsNum}
                                   />
                 </View>
             </View>
@@ -228,6 +169,10 @@ function SignUp() {
             </View>
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Phone No:</Text>
+              <TextInput style={styles.textInput} keyboardType='number-pad' textContentType='telephoneNumber'></TextInput>
+            </View>
+            <View style={{padding: 0}}>
+              <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
               <TextInput style={styles.textInput} keyboardType='number-pad' textContentType='telephoneNumber'></TextInput>
             </View>
             <View style={{padding: 0}}>
@@ -330,6 +275,33 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     backgroundColor: 'white',
     height: 21
+  },
+
+  textInputAge:{
+    borderWidth: 1,
+    borderColor: '#401F02',
+    paddingLeft: 5,
+    backgroundColor: 'white',
+    height: 21,
+    width: 70
+  },
+
+  textInputGender:{
+    borderWidth: 1,
+    borderColor: '#401F02',
+    paddingLeft: 5,
+    backgroundColor: 'white',
+    height: 21,
+    width: 90
+  },
+
+  textInputDob:{
+    borderWidth: 1,
+    borderColor: '#401F02',
+    paddingLeft: 5,
+    backgroundColor: 'white',
+    height: 21,
+    width: 90
   }
 });
 
