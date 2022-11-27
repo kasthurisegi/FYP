@@ -1,13 +1,21 @@
 import { View, Text, StyleSheet, Image,TouchableOpacity } from 'react-native'
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { WhatsAppOutlined } from '@ant-design/icons'
 import { auth } from '../../FirebaseConfig'
 import { signOut } from "firebase/auth";
+import { UserInfoContext } from '../context/userInfoContext'
+import { DataProcessorContext } from '../context/DataProcessor'
 
 const ProfileScreen = () => {
+
+  const navigation = useNavigation();
+
+  const { 
+    currentUser
+  } = useContext(DataProcessorContext);
 
   function handleLogin(){
     signOut(auth).then(() => {
@@ -20,11 +28,13 @@ const ProfileScreen = () => {
   
   return (
       <View style={styles.container}> 
-        <Image resizeMode='cover' style={{aspectRatio: 1, width: '40%', borderWidth: '2px', borderRadius: '100%' }} source={require('../assets/room.jpg')}></Image>
-        <Text style={{color:'#000000', fontSize: '16px', fontWeight: '700'}}>Anna Mona</Text>
+        <Image resizeMode='cover' style={{aspectRatio: 1, width: '40%', borderWidth: '2px', borderRadius: '100%' }} source={{
+          uri: currentUser?.userProfile
+        }}></Image>
+        <Text style={{color:'#000000', fontSize: '16px', fontWeight: '700'}}>{currentUser?.userName}</Text>
           <View style={styles.btnsContainer}>
 
-            <TouchableOpacity onPress={()=> {}} style={styles.editButton}>
+            <TouchableOpacity onPress={()=> { navigation.navigate("EditProfile") }} style={styles.editButton}>
                 <View style={styles.flexDirection}>
                   <Ionicons name={'person'} size={25} style={{}}/>
                   <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Edit Profile</Text>
@@ -42,13 +52,6 @@ const ProfileScreen = () => {
                 <View style={styles.flexDirection}>
                   <Ionicons name={'information-circle'} size={30} style={{}}/>
                   <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Terms & Conditions</Text>
-                </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={()=> {}} style={styles.deactivateAccount}>
-                <View style={styles.flexDirection}>
-                  <Entypo name={'remove-user'} size={25} style={{}}/>
-                  <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Deactivate Account</Text>
                 </View>
             </TouchableOpacity>
 

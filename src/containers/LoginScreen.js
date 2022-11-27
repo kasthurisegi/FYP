@@ -2,12 +2,14 @@ import { View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity, F
 import React, {useState, useEffect} from 'react'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../FirebaseConfig';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc, addDoc, collection } from 'firebase/firestore';
+import { auth, db } from '../../FirebaseConfig';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DropDownPicker from 'react-native-dropdown-picker';
 import moment from 'moment';
+import { v4 as uuid } from 'uuid';
 
 const LoginScreen = () => {
 
@@ -15,7 +17,7 @@ const LoginScreen = () => {
 
   /////// Gender Picker /////
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("");
   const [items, setItems] = useState([
     {label: 'Male', value: 'Male'},
     {label: 'Female', value: 'Female'}
@@ -27,7 +29,9 @@ const LoginScreen = () => {
   /////////// Age Auto Fill Function //////////
   const [age, setAge] = useState("")
 
-  function handleDateChange(date) {setSelectedDate(date);
+  function handleDateChange(date) {
+
+    setSelectedDate(date);
 
     var currentYear = moment().format("YYYY")
     var userBirthYear = moment(date).format("YYYY")
@@ -60,26 +64,83 @@ const LoginScreen = () => {
 
   /////////// Sign up Function //////////
   const [isSignUp, setIsSignUp] = useState (false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState('');
 
-  function SignUp() {
-    createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword,signUpConfirmPassword)
-    .then((userCredential) => {
-      console.log('Signed Up')
-    })
-    .catch((error) => {
-      const err = error.message;
-      const one = err.replace('Firebase: Error', '')
-      const two = one.replace('(auth/', '')
-      const three = two.replace(').', '')
-      const newErr = three.replace('-', ' ')
-      setRegisterErrorMessage(newErr)
-    });
+  async function SignUp() {
+
+    if(name !== "" 
+      && phone !== "" 
+      && age !== ""
+      && value !== "" 
+      && selectedDate !== ""
+      && signUpEmail !== "" 
+      && whatsapp !== ""
+      && signUpPassword !== ""
+      && signUpConfirmPassword !== ""
+    ){
+      if(signUpPassword === signUpConfirmPassword){
+      //Add user login credential to firebase authentication
+      await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+        .then((userCredential) => {
+
+          //Update user profile in firebase authentication
+          updateProfile(auth.currentUser, {
+            displayName: name, photoURL: "https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000"
+          }).then(() => {
+            console.log("Profile Updated");
+          }).catch((error) => {
+            // An error occurred
+            // ...
+          });
+
+          console.log('Signed Up with: ', userCredential)
+
+          //user details
+          var body = {
+            userID: userCredential.user.uid,
+            userName: name,
+            userProfile: "https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000",
+            userDob: moment(selectedDate).toISOString(),
+            userAge: age,
+            userGender: value,
+            userEmail: signUpEmail,
+            userPhone: phone,
+            userWhatsapp: whatsapp,
+          }
+
+          try {
+            //Add user details to firestore
+            setDoc(doc(db, "users", userCredential.user.uid), body).then(() => {
+              console.log('added to document')
+              //Pass user data to global state
+            })
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+      })
+      .catch((error) => {
+        const err = error.message;
+        const one = err.replace('Firebase: Error', '')
+        const two = one.replace('(auth/', '')
+        const three = two.replace(').', '')
+        const newErr = three.replace('-', ' ')
+        setRegisterErrorMessage(newErr)
+      });
+    }
+    else{
+      alert("Password not matched!")
+    }
+    }
+    else{
+      alert("Please complete all the field!")
+    }
+    
   }
-
-
 
 ////// Sign in page //////
   return (
@@ -146,7 +207,7 @@ const LoginScreen = () => {
             
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Name:</Text>
-              <TextInput style={styles.textInput}></TextInput>
+              <TextInput style={styles.textInput} onChangeText={setName}></TextInput>
             </View>
 
             <View style={{zIndex: 1000}}>
@@ -188,12 +249,12 @@ const LoginScreen = () => {
 
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Phone No:</Text>
-              <TextInput style={styles.textInput} keyboardType='number-pad' textContentType='telephoneNumber'></TextInput>
+              <TextInput style={styles.textInput} onChangeText={setPhone} keyboardType='numeric' textContentType='telephoneNumber'></TextInput>
             </View>
 
             <View style={{padding: 0}}>
               <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
-              <TextInput style={styles.textInput} keyboardType='number-pad' textContentType='telephoneNumber'></TextInput>
+              <TextInput style={styles.textInput} onChangeText={setWhatsapp} keyboardType='numeric' textContentType='telephoneNumber'></TextInput>
             </View>
 
             <View style={{padding: 0}}>
@@ -305,10 +366,11 @@ const styles = StyleSheet.create({
   },
 
   textInputAge:{
-    borderWidth: 1,
-    borderColor: '#401F02',
+    // borderWidth: 1,
+    // borderColor: '#401F02',
+    border: 'none',
     paddingLeft: 5,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     height: 21,
     width: 70
   },

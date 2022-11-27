@@ -12,6 +12,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { UserInfoContext } from './src/context/userInfoContext';
+import EditProfile from './src/containers/EditProfile';
+import RoommateDetails from './src/containers/RoommateDetails';
+import RoomDetails from './src/containers/RoomDetails';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,6 +53,21 @@ function HomeStack() {
                     }}/>
 
         <Stack.Screen  
+          name="RoommateDetails" 
+          component={RoommateDetails} 
+          options={{title: 'Roommate Details',
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                      backgroundColor: '#D6B598',
+                    },
+                    headerTintColor: '#000000',
+                    headerTitleStyle: {
+                      fontSize: '24px',
+                      fontWeight: 'bold',
+                    },
+                    }}/>
+
+        <Stack.Screen  
         name="RoomViewPostScreen" 
         component={RoomViewPostScreen} 
         options={{title: 'Find Room',
@@ -63,6 +81,21 @@ function HomeStack() {
                     fontWeight: 'bold',
                   },
                   }}/>
+
+        <Stack.Screen  
+          name="RoomDetails" 
+          component={RoomDetails} 
+          options={{title: 'Room Details',
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                      backgroundColor: '#D6B598',
+                    },
+                    headerTintColor: '#000000',
+                    headerTitleStyle: {
+                      fontSize: '24px',
+                      fontWeight: 'bold',
+                    },
+                    }}/>
 
         <Stack.Screen  
         name="AddRoommateScreen" 
@@ -98,6 +131,7 @@ function HomeStack() {
     
   );
 }
+
 function FavouriteStack() {
   return (
       <Stack.Navigator >
@@ -126,6 +160,20 @@ function ProfileStack() {
         name="ProfileScreen" 
         component={ProfileScreen} 
         options={{title: 'Profile', 
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#D6B598',
+                  },
+                  headerTintColor: '#000000',
+                  headerTitleStyle: {
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                  }, 
+                  }}/>
+      <Stack.Screen  
+        name="EditProfile" 
+        component={EditProfile} 
+        options={{title: 'Edit Profile', 
                   headerTitleAlign: 'center',
                   headerStyle: {
                     backgroundColor: '#D6B598',

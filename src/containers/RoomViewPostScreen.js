@@ -1,114 +1,138 @@
-import { SafeAreaView,StyleSheet, ScrollView, View, Text, Dimensions, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import react, {useState} from 'react'
+import { SafeAreaView,StyleSheet, ScrollView, View, Text, Dimensions, Image, TouchableOpacity, Linking } from 'react-native'
+import React, {useState, useEffect, useContext, useRef} from 'react'
+import { useNavigation } from '@react-navigation/native'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { WhatsAppOutlined } from '@ant-design/icons'
-
-const images = [
-  'https://cdn-prod.medicalnewstoday.com/content/images/articles/321/321450/stressed-woman-at-work.jpg',
-  'https://health.clevelandclinic.org/wp-content/uploads/sites/3/2022/05/10WaysToEaseStress-1166219231-770x533-1.jpg',
-  'https://www.popsci.com/uploads/2021/10/05/AUA_stress.jpg',
-]
-
-const WIDTH = Dimensions.get('window').width
-const HEIGHT = Dimensions.get('window').height
+import { DataProcessorContext } from '../context/DataProcessor'
+import { auth, storage, db } from '../../FirebaseConfig'
+import { doc, setDoc, deleteDoc } from 'firebase/firestore'
+import { v4 as uuid } from 'uuid'
+import moment from 'moment'
 
 const RoomViewPostScreen = () => {
-  const [imageActive, setimageActive] = useState(0)
 
-  onchange = (nativeEvent) => {
-    if (nativeEvent) {
-      const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width)
-      if (slide != imageActive) {setimageActive(slide)}
+const navigation = useNavigation();
+
+const { 
+    currentUser,
+    room,
+    selectedRoommate,
+    dispatchSelectRoommate,
+    favoriteRoom,
+    dispatchSelectRoom
+  } = useContext(DataProcessorContext);
+
+  const [currRoom, setCurrRoom] = useState(null);
+
+  useEffect(() => {
+    const newArray = room?.map(item => {
+      var state = favoriteRoom && favoriteRoom.some(fav => item.roomID === fav.roomID)
+        return {...item, favorite: state}
+    })
+
+    setCurrRoom(newArray)
+    
+  },[favoriteRoom, room])
+
+  function handleSelectRoom(val){
+    dispatchSelectRoom({ type: "CHANGE_ROOM", payload: val })
+    navigation.navigate("RoomDetails")
+  };
+
+  function handleFavorite(val){
+    try {
+
+      var body = {
+        favoriteID: uuid(),
+        userID: currentUser?.userID,
+        roomID: val,
+        createdBy: moment().format()
+      }
+      //Add user details to firestore
+      setDoc(doc(db, "favoriteRoom", body.favoriteID), body).then(() => {
+        console.log('Favorited room')
+      })
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
   }
+
+  async function handleRemoveFavorite(val){
+    const favoriteID = favorite.filter(item => item.roomID === val)
+    await deleteDoc(doc(db, "favoriteRoom", favoriteID[0].favoriteID));
+  }
+  
 
   return (
 
    <View style={styles.mainContainer}>
+
       <View style= {styles.displayContainer}>
-        <View style= {styles.cardContainer}>
+        {currRoom && currRoom.map((item,index) => {
+          return(
+            <View key={index} style= {styles.cardContainer}>
+              <View style={{ display: 'flex', flexDirection: 'row', width: '100%', overflow: 'scroll', paddingHorizontal: '15px', gap: '10px', paddingBottom: '10px' }}>
+               {item.roomPic.map((pic, index) => {
+                return(
+                  <Image key={index} resizeMode='cover' style={{aspectRatio: 1, width: '200px', borderWidth: '2px', borderRadius: '15px' }} source={{ uri: pic }}></Image>
+                )
+              })
+              }
+              </View>
+              <View style={styles.detailsContainer}>
+              <View style={styles.profilePictureContainer}>
+                <Image resizeMode='cover' style={{aspectRatio: 1, width: '100%', borderWidth: '2px', borderRadius: '100%' }} source={{ uri: item.profilePic }}></Image>
+              </View>
+              <View style={styles.profileInfoContainer} >
+                <View style={styles.upperContainer} >
+                  <View style={styles.usernameContainer}>
+                      <Text style={{fontSize: '13px', fontWeight: "700"}}>{item.name}</Text>
+                        <View style={styles.userAgeContainer}>
+                          <Text style={{fontSize: '12px'}}>{item.age}</Text>
+                          <Text style={{fontSize: '12px'}}>,</Text>
+                          <Text style={{fontSize: '12px'}}>{item.gender}</Text>
+                        </View>
+                        <View>
+                            <Text>{item.city}</Text>
+                        </View>
+                  </View>
+                  <View style={styles.amountContainer}>
+                      <Text style={{fontSize: '16px', fontWeight: "800"}}>RM{item.price}</Text>
+                      <Text style={{fontSize: '10px'}}>/</Text>
+                      <Text style={{fontSize: '10px'}}>Month</Text>
+                  </View>
+                </View>
+                <View style={styles.belowContainer}>
+                <Text style={{fontSize: '10px', paddingTop: '10px'}}> 
+                  {item.description}
+                </Text>
+                </View>
+                <View style={styles.btnContainer}>
+                  <TouchableOpacity onPress={() => item.favorite ? handleRemoveFavorite(item.roomID) : handleFavorite(item.roomID) }>
+                    {item.favorite ?
+                      <AntDesignIcon name={'heart'} size={30} style={{}}/> 
+                      :
+                      <AntDesignIcon name={'hearto'} size={30} style={{}}/> 
+                    }
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => {
+                    //Open whatsapp with number
+                    Linking.openURL(
+                      'http://api.whatsapp.com/send?phone=6'+ item.whatsapp
+                    );
+                  }}>
+                    <WhatsAppOutlined style={{ fontSize: '30px', color: '#25D366' }}/>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.btnViewDetails} onPress={()=> handleSelectRoom(item)} >
+                    <Text style={{color:'#FFFFFF'}}>View Details</Text>
+                  </TouchableOpacity>
 
-          <SafeAreaView style= {styles.carouselContainer}>
-              <View style= {styles.wrap}>
-              <ScrollView
-                onScroll={({nativeEvent}) => onchange(nativeEvent)}
-                showsHorizontalScrollIndicator={false}
-                pagingEnabled
-                horizontal
-                style={styles.wrap}
-                >
-
-                {
-                  images.map((e, index) => 
-                  <Image 
-                    key={e}
-                    resizeMode='cover'
-                    style={styles.wrap}
-                    source={{uri: e}}
-                    />
-                  )
-                }
-
-              </ScrollView>
-                <View style={styles.wrapDot}>
-                  {
-                    images.map((e, index) =>
-                    <Text 
-                    key={e} 
-                    style={imageActive == index ? styles.dotActive : styles.dot}
-                    >●</Text>
-                    )
-                  }
                 </View>
               </View>
-          </SafeAreaView>
-
-        <View style={styles.detailsContainer}>
-        <View style={styles.profilePictureContainer}>
-          <Image resizeMode='cover' style={{aspectRatio: 1, width: '100%', borderWidth: '2px', borderRadius: '100%' }} source={require('../assets/room.jpg')}></Image>
-          </View>
-        <View style={styles.profileInfoContainer} >
-          <View style={styles.upperContainer} >
-            <View style={styles.usernameContainer}>
-                <Text style={{fontSize: '13px', fontWeight: "700"}}>Robert Fox</Text>
-                  <View style={styles.userAgeContainer}>
-                    <Text style={{fontSize: '12px'}}>31</Text>
-                    <Text style={{fontSize: '12px'}}>,</Text>
-                    <Text style={{fontSize: '12px'}}>Male</Text>
-                  </View>
-                  <View>
-                    <Text style={{fontSize: '12px', fontWeight: "600"}}>City</Text>
-                  </View>
-            </View>
-            <View style={styles.amountContainer}>
-                <Text style={{fontSize: '16px', fontWeight: "800"}}>RM100</Text>
-                <Text style={{fontSize: '10px'}}>/</Text>
-                <Text style={{fontSize: '10px'}}>Month</Text>
-            </View>
-          </View>
-          <View style={styles.belowContainer}>
-          <Text style={{fontSize: '10px', paddingTop: '10px'}}> 
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. 
-            Velit officia consequat duis enim velit mollit. 
-            Exercitation veniam consequat.
-          </Text>
-          </View>
-          <View style={styles.btnContainer}>
-            <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')}>
-              <AntDesignIcon name={'hearto'} size={30} style={{}}/>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <WhatsAppOutlined style={{ fontSize: '30px', color: '#25D366' }}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btnViewDetails} onPress={()=>navigation.navigate('HomeScreen')} >
-              <Text style={{color:'#FFFFFF'}}>View Details</Text>
-            </TouchableOpacity>
-
-          </View>
-        </View>
-        </View> 
-        </View>
+              </View> 
+              </View>
+          )
+        })}
       </View>
       </View>
   )
@@ -127,46 +151,19 @@ const styles = StyleSheet.create({
         flex: 1,
         display: "flex",
         alignItems: 'center',
+        width: '100%'
       },
 
       cardContainer: {
           flexDirection: 'column',
           width: '90%',
-          height: '70%',
+          height: '60%',
           backgroundColor: '#FFEDDD',
           shadowRadius: '10px',
           borderRadius: '20px',
           padding: '10px',
       },
-
-      carouselContainer: {
-        flex: 0.85,
-        alignItems: 'center',
-      },
-
-      wrap: {
-        width: WIDTH * 0.8,
-        height: HEIGHT * 0.25,
-        borderRadius: '20px',
-      },
-
-      wrapDot: {
-        position: 'absolute',
-        bottom: 0,
-        flexDirection: 'row',
-        alignSelf: 'center',
-      },
       
-      dotActive: {
-        margin: 3,
-        color: '#6E4119',
-      },
-
-      dot: {
-        margin: 3,
-        color: '#F3C296',
-
-      },
       profilePictureContainer: {
         flex: 0.25,
         paddingTop: '10px',
