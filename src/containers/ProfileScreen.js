@@ -57,8 +57,8 @@ const ProfileScreen = () => {
                   <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Terms & Conditions</Text>
                 </View>
             </TouchableOpacity>
-
-            <TouchableOpacity onPress={()=> {changePassword()}} style={styles.changePassword}>
+            
+            <TouchableOpacity onPress={()=>navigation.navigate('ChangePassword')} style={styles.changePassword}>
                 <View style={styles.flexDirection}>
                   <Ionicons name={'lock-closed'} size={29} style={{}}/>
                   <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Change Password</Text>

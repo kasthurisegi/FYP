@@ -71,10 +71,10 @@ const {
         {currRoom && currRoom.map((item,index) => {
           return(
             <View key={index} style= {styles.cardContainer}>
-              <View style={{ display: 'flex', flexDirection: 'row', width: '100%', overflow: 'scroll', paddingHorizontal: '15px', gap: '10px', paddingBottom: '10px' }}>
+              <View style={{ display: 'flex', flexDirection: 'row', width: '100%', overflow: 'scroll', gap: '10px', paddingBottom: '10px' }}>
                {item.roomPic.map((pic, index) => {
                 return(
-                  <Image key={index} resizeMode='cover' style={{aspectRatio: 1, width: '200px', borderWidth: '2px', borderRadius: '15px' }} source={{ uri: pic }}></Image>
+                  <Image key={index} resizeMode='cover' style={{aspectRatio: 1, width: '250px', borderWidth: '2px', borderRadius: '15px' }} source={{ uri: pic }}></Image>
                 )
               })
               }
@@ -103,9 +103,9 @@ const {
                   </View>
                 </View>
                 <View style={styles.belowContainer}>
-                <Text style={{fontSize: '10px', paddingTop: '10px'}}> 
-                  {item.description}
-                </Text>
+                  <Text style={{fontSize: '10px', paddingTop: '10px'}}> 
+                    {item.description}
+                  </Text>
                 </View>
                 <View style={styles.btnContainer}>
                   <TouchableOpacity onPress={() => item.favorite ? handleRemoveFavorite(item.roomID) : handleFavorite(item.roomID) }>
@@ -127,10 +127,10 @@ const {
                     <Text style={{color:'#FFFFFF'}}>View Details</Text>
                   </TouchableOpacity>
 
+                  </View>
                 </View>
-              </View>
               </View> 
-              </View>
+            </View>
           )
         })}
       </View>
@@ -148,13 +148,13 @@ const styles = StyleSheet.create({
       },
 
       displayContainer: {
-        flex: 1,
         display: "flex",
         alignItems: 'center',
         width: '100%'
       },
 
       cardContainer: {
+          flex: 1,
           flexDirection: 'column',
           width: '90%',
           height: '60%',
@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
         paddingTop: '10px',
         paddingLeft: '10px',
       },
+
       profileInfoContainer: {
         flex: 1,
         paddingTop: "15px",
@@ -206,14 +207,13 @@ const styles = StyleSheet.create({
       belowContainer:{
         flexDirection: "row",
         width: '100%',
-        height: '40%',
+        height: '20%',
       },
   
       btnContainer:{
         flexDirection: "row",
         width: '100%',
         height: '30%',
-        paddingTop: '5px',
         gap: 30,
       },
 

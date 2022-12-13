@@ -15,6 +15,7 @@ import { UserInfoContext } from './src/context/userInfoContext';
 import EditProfile from './src/containers/EditProfile';
 import RoommateDetails from './src/containers/RoommateDetails';
 import RoomDetails from './src/containers/RoomDetails';
+import ChangePassword from './src/containers/ChangePassword';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -174,6 +175,20 @@ function ProfileStack() {
         name="EditProfile" 
         component={EditProfile} 
         options={{title: 'Edit Profile', 
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#D6B598',
+                  },
+                  headerTintColor: '#000000',
+                  headerTitleStyle: {
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                  }, 
+                  }}/>
+      <Stack.Screen  
+        name="ChangePassword" 
+        component={ChangePassword} 
+        options={{title: 'Change Password', 
                   headerTitleAlign: 'center',
                   headerStyle: {
                     backgroundColor: '#D6B598',
