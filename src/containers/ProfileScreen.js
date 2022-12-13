@@ -9,6 +9,8 @@ import { signOut } from "firebase/auth";
 import { UserInfoContext } from '../context/userInfoContext'
 import { DataProcessorContext } from '../context/DataProcessor'
 
+
+
 const ProfileScreen = () => {
 
   const navigation = useNavigation();
@@ -25,6 +27,7 @@ const ProfileScreen = () => {
       // An error happened.
     });
   }
+
   
   return (
       <View style={styles.container}> 
@@ -52,6 +55,13 @@ const ProfileScreen = () => {
                 <View style={styles.flexDirection}>
                   <Ionicons name={'information-circle'} size={30} style={{}}/>
                   <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Terms & Conditions</Text>
+                </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={()=> {changePassword()}} style={styles.changePassword}>
+                <View style={styles.flexDirection}>
+                  <Ionicons name={'lock-closed'} size={29} style={{}}/>
+                  <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Change Password</Text>
                 </View>
             </TouchableOpacity>
 
@@ -176,7 +186,7 @@ const styles = StyleSheet.create({
       elevation: 11,
     },
 
-    deactivateAccount: {
+    changePassword: {
       width: '90%', 
       height: '20%',  
       paddingLeft: '30px',

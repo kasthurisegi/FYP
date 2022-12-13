@@ -232,11 +232,11 @@ async function isEmptyObject(obj) {
           <TextInput style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, building: e.target.value }) }} value={roommateDetails.building}></TextInput>
         </View>
         <View style={styles.inputContainer}>
-          <Text style={{paddingVertical: 5}}>Address:</Text>
+          <Text style={{paddingVertical: 5}}>City:</Text>
           <TextInput style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, address: e.target.value }) }} value={roommateDetails.address}></TextInput>
         </View>
         <View style={styles.inputContainer}>
-          <Text style={{paddingVertical: 5}}>City:</Text>
+          <Text style={{paddingVertical: 5}}>State:</Text>
           <TextInput style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, city: e.target.value }) }} value={roommateDetails.city}></TextInput>
         </View>
       </View>

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity, F
 import React, {useState, useEffect} from 'react'
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from "firebase/auth";
 import { doc, setDoc, addDoc, collection } from 'firebase/firestore';
 import { auth, db } from '../../FirebaseConfig';
 import DatePicker from "react-datepicker";
@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DropDownPicker from 'react-native-dropdown-picker';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
+
 
 const LoginScreen = () => {
 
@@ -61,6 +62,32 @@ const LoginScreen = () => {
           setErrMessage(newErr)
         });
   }
+
+  //////////// Reset password ////////////
+  const resetPassword =()=>{
+    if(signInEmail!=null)
+    {
+    sendPasswordResetEmail(auth, signInEmail)
+      .then(() => {
+        alert('Password reset email sent')
+        // ..
+      })
+      .catch((error) => {
+        const errormsg = error.message;
+        const msgone = errormsg.replace('Firebase: Error', '')
+        const msgtwo = msgone.replace('(auth/', '')
+        const msgthree = msgtwo.replace(').', '')
+        const newErrmsg = msgthree.replace('-', ' ')
+        setErrMessage(newErrmsg)
+      });
+
+    }
+    else
+    {
+      alert('Please enter a valid email')
+    }
+  }
+
 
   /////////// Sign up Function //////////
   const [isSignUp, setIsSignUp] = useState (false);
@@ -180,7 +207,7 @@ const LoginScreen = () => {
 
           <View style={{padding: 0}}>
             <TouchableOpacity style={{}}>
-              <Text style={{ color:'#0A1172'}}>Forget Password?</Text>
+              <Text onPress={()=>resetPassword()} style={{ color:'#0A1172'}}>Forget Password?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -188,7 +215,7 @@ const LoginScreen = () => {
 
         :
 
-////// sign up page //////
+        ////// sign up page //////
         <View style={styles.signUpContainer}>
           <View style={{height: '10%', width: '100%', flexDirection: 'row', alignItems: 'center'}}>
             
