@@ -5,7 +5,6 @@ import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import { WhatsAppOutlined } from '@ant-design/icons'
 import { DataProcessorContext } from '../context/DataProcessor'
 
-
 const RoommateDetails = () => {
 
 // page navagation
@@ -19,7 +18,6 @@ const {
     <View>
         {selectedRoommate &&
             <Text>{selectedRoommate.name}</Text>
-
         }
     </View>
   )
