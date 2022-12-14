@@ -145,12 +145,14 @@ const styles = StyleSheet.create({
         display: "flex",
         paddingVertical: "30px",
         alignItems: 'center',
+        overflow: 'scroll'
       },
 
       displayContainer: {
         display: "flex",
         alignItems: 'center',
-        width: '100%'
+        width: '100%',
+        gap: '30px'
       },
 
       cardContainer: {

@@ -281,7 +281,7 @@ async function isEmptyObject(obj) {
       </View>
 
       <TouchableOpacity onPress={()=> { handleAddRoommate() }} style={styles.saveButton}>
-        <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Add Roommate</Text>
+        <Text style={{color:'#FFFFFF', fontSize: '16px', fontWeight:'400'}}>Add Roommate</Text>
       </TouchableOpacity>
 
     </View>
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     height: '40px',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ECD0B8',
+    backgroundColor: '#401F02',
     borderRadius: '20px',
     borderColor: 'black',
     borderWidth: '1px',
@@ -355,6 +355,8 @@ const styles = StyleSheet.create({
     shadowRadius: 7,
     elevation: 11,
   },
+
+  
 
 })
 
