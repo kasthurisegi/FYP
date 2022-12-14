@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
         display: "flex",
         paddingVertical: "30px",
         alignItems: 'center',
+        gap: '30px'
       },
 
     roommateProfileContainer: {

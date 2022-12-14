@@ -208,7 +208,7 @@ const EditProfile = () => {
         </View>
         
         <TouchableOpacity onPress={()=> { handleSaveProfile() }} style={styles.saveButton}>
-            <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>SAVE</Text>
+            <Text style={{color:'#ffffff', fontSize: '20px', fontWeight: '500'}}>SAVE</Text>
         </TouchableOpacity>
       
     </View>
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
         height: '40px',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ECD0B8',
+        backgroundColor: '#401F02',
         borderRadius: '20px',
         borderColor: 'black',
         borderWidth: '1px',
@@ -272,11 +272,10 @@ const styles = StyleSheet.create({
       },
 
       textInputAge:{
-        // borderWidth: 1,
-        // borderColor: '#401F02',
-        border: 'none',
+        borderWidth: 1,
+        borderColor: '#401F02',
         paddingLeft: 5,
-        // backgroundColor: 'white',
+        backgroundColor: 'white',
         height: 21,
         width: 70
       },
