@@ -17,7 +17,8 @@ const {
   return (
     <View>
         {selectedRoommate &&
-            <Text {...selectedRoommate.address}></Text>
+            <Text>{selectedRoommate.name}</Text>
+          
         }
     </View>
    
