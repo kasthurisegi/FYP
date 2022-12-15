@@ -117,7 +117,7 @@ async function isEmptyObject(obj) {
 
         uploadImage(roommateDetails.profilePic).then(url => {
 
-          var body = {...roommateDetails, profilePic: url, roommateID: uuid()};
+          var body = {...roommateDetails, profilePic: url, roommateID: uuid(), userID: currentUser.userID};
 
           try {
             //Add user details to firestore

@@ -119,6 +119,7 @@ async function isEmptyObject(obj) {
             ...roomDetails, 
             roomPic: url, 
             roomID: uuid(),
+            userID: currentUser.userID,
             name: currentUser?.userName,
             age: currentUser?.userAge,
             gender: currentUser?.userGender,
