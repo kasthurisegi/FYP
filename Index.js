@@ -16,6 +16,7 @@ import EditProfile from './src/containers/EditProfile';
 import RoommateDetails from './src/containers/RoommateDetails';
 import RoomDetails from './src/containers/RoomDetails';
 import ChangePassword from './src/containers/ChangePassword';
+import TermsAndConditions from './src/containers/TermsAndConditions';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -199,8 +200,22 @@ function ProfileStack() {
                     fontWeight: 'bold',
                   }, 
                   }}/>
+                  
+      <Stack.Screen  
+        name="TermsAndConditions" 
+        component={TermsAndConditions} 
+        options={{title: 'Terms And Conditions', 
+                  headerTitleAlign: 'center',
+                  headerStyle: {
+                    backgroundColor: '#D6B598',
+                  },
+                  headerTintColor: '#000000',
+                  headerTitleStyle: {
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                  }, 
+                  }}/>
       </Stack.Navigator>
-    
   );
 }
 

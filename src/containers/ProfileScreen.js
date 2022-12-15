@@ -44,14 +44,7 @@ const ProfileScreen = () => {
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={()=> {}} style={styles.policyButton}>
-                <View style={styles.flexDirection}>
-                  <Ionicons name={'shield-checkmark'} size={27} style={{}}/>
-                  <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Privacy Policy</Text>
-                </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={()=> {}} style={styles.termsButton}>
+            <TouchableOpacity onPress={()=>navigation.navigate('TermsAndConditions')} style={styles.termsButton}>
                 <View style={styles.flexDirection}>
                   <Ionicons name={'information-circle'} size={30} style={{}}/>
                   <Text style={{color:'#000000', fontSize: '20px', fontWeight: '500'}}>Terms & Conditions</Text>
