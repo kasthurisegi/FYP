@@ -108,6 +108,7 @@ const {
 
     if(roomPic){
       uploadImage(roomPic).then((url) => {
+        console.log(url)
         //for multiple image, put url will do no need url[0]
         let body = {...roomDetails, roomPic: url}
 
@@ -115,7 +116,6 @@ const {
           alert('Post Updated');
           navigation.navigate("RoomViewPostScreen")
         })
-        
       })
     }
     
@@ -136,13 +136,25 @@ const {
     })
   }
 
+
   return (
         <>
           {roomDetails && roomDetails.userID === currentUser.userID ?
             <View style={styles.container}>
-            
-              <Image source={{ uri: roomDetails.uri ? roomPic[0].uri : roomDetails.roomPic }} resizeMode='cover' style={{aspectRatio: 1, width: '100px', height: '100px', borderWidth: '2px', borderRadius: '15px' }}/>
-                
+            <View style={{ display: 'flex', flexDirection: 'row', gap: '10px', width: '100%', overflow: 'scroll', paddingHorizontal: '15px' }}>
+            {!roomPic && roomDetails.roomPic.map((item, index) => {
+              return(
+                <Image key={index} source={{ uri: item }} resizeMode='cover' style={{aspectRatio: 1, width: '100px', height: '100px', borderWidth: '2px', borderRadius: '15px' }}/>
+              )
+            })}
+            {roomPic && roomPic.map((item, index) => {
+              return(
+              <Image key={index} source={{ uri: item.uri }} resizeMode='cover' style={{aspectRatio: 1, width: '100px', height: '100px', borderWidth: '2px', borderRadius: '15px' }}/>
+              )
+            })
+            }
+            </View>
+
               <Button title="Choose Image" onPress={pickImage} />
 
               <View style={styles.inputContainer}>
