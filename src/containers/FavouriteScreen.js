@@ -305,8 +305,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: '100%',
     height: '30%',
-    paddingTop: '15px',
-    gap: 10
+    gap: 5
   },
 
   viewDetailsBtn:{
@@ -332,7 +331,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     flexDirection: 'column',
     width: '90%',
-    height: '60%',
+    height: '80%',
     backgroundColor: '#FFEDDD',
     shadowRadius: '10px',
     borderRadius: '20px',
@@ -388,7 +387,6 @@ btnContainer:{
   flexDirection: "row",
   width: '100%',
   height: '30%',
-  paddingTop: '5px',
   gap: 30,
 },
 

@@ -60,6 +60,7 @@ const LoginScreen = () => {
           const three = two.replace(').', '')
           const newErr = three.replace('-', ' ')
           setErrMessage(newErr)
+          console.log('Signed In')
         });
   }
 
@@ -265,6 +266,7 @@ const LoginScreen = () => {
                                   setOpen={setOpen}
                                   setValue={setValue}
                                   setItems={setItems}
+                                  placeholder='Select'
                                   />
                 </View>
             </View>
@@ -393,11 +395,10 @@ const styles = StyleSheet.create({
   },
 
   textInputAge:{
-    // borderWidth: 1,
-    // borderColor: '#401F02',
-    border: 'none',
+    borderWidth: 1,
+    borderColor: '#401F02',
     paddingLeft: 5,
-    // backgroundColor: 'white',
+    backgroundColor: 'white',
     height: 21,
     width: 70
   },
