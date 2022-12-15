@@ -11,6 +11,7 @@ import { doc, setDoc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { updateProfile } from 'firebase/auth'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import * as ImagePicker from 'expo-image-picker';
+import RoommateViewPostScreen from './RoommateViewPostScreen'
 
 const RoommateDetails = () => {
 
@@ -122,14 +123,17 @@ const pickImage = async () => {
         let body = {...roommateDetails, profilePic: url[0]}
 
         updateDoc(roommateRef, body).then(res => {
-          alert('Updated Rommate');
+          alert('Post Updated');
         })
         
       })
-    }else{
+    }
+    
+    else{
       let body = roommateDetails;
       await updateDoc(roommateRef, body).then(res => {
-        alert('Updated Rommate');
+        alert('Post Updated');
+        navigation.navigate("RoommateViewPostScreen")
       })
       
     }
@@ -137,8 +141,8 @@ const pickImage = async () => {
 
   const deleteRoommate = async () => {
     await deleteDoc(doc(db, "roommates", selectedRoommate.roommateID)).then(res => {
-      alert("Deleted Roommates")
-      navigation.navigate("HomeScreen")
+      alert("Post Deleted ")
+      navigation.navigate("RoommateViewPostScreen")
     })
   }
 
@@ -191,6 +195,10 @@ const pickImage = async () => {
           <View style={styles.inputContainer}>
             <Text style={{paddingVertical: 5}}>Description:</Text>
             <TextInput style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, description: e.target.value }) }} value={roommateDetails.description}></TextInput>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
+            <TextInput keyboardType='numeric' style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, whatsapp: e.target.value }) }} value={roommateDetails.whatsapp}></TextInput>
           </View>
           
           <View style={styles.details}>
@@ -277,17 +285,12 @@ const pickImage = async () => {
             </View>
           </View>
 
-          <View style={styles.inputContainer}>
-            <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
-            <TextInput keyboardType='numeric' style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, whatsapp: e.target.value }) }} value={roommateDetails.whatsapp}></TextInput>
-          </View>
-
-          <TouchableOpacity onPress={()=> { updateRoommate() }} style={styles.saveButton}>
-            <Text style={{color:'#FFFFFF', fontSize: '16px', fontWeight:'400'}}>Update Roommate</Text>
+          <TouchableOpacity onPress={()=> { updateRoommate() }} style={styles.updateButton}>
+            <Text style={{color:'white', fontSize: '16px', fontWeight:'400'}}>Update Roommate</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={()=> { deleteRoommate() }} style={styles.saveButton}>
-            <Text style={{color:'#FFFFFF', fontSize: '16px', fontWeight:'400'}}>Delete Roommate</Text>
+          <TouchableOpacity onPress={()=> { deleteRoommate() }} style={styles.deleteButton}>
+            <Text style={{color:'white', fontSize: '16px', fontWeight:'400'}}>Delete Roommate</Text>
           </TouchableOpacity>
 
         </View>
@@ -326,6 +329,10 @@ const pickImage = async () => {
           <View style={styles.inputContainer}>
             <Text style={{paddingVertical: 5}}>Description:</Text>
             <Text style={styles.textInput}>{selectedRoommate.description}</Text>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
+            <Text keyboard style={styles.textInput}>{selectedRoommate.whatsapp}</Text>
           </View>
           
           <View style={styles.details}>
@@ -383,11 +390,6 @@ const pickImage = async () => {
               <Text style={styles.textInput}>{selectedRoommate.preferredPet}</Text>
             </View>
           </View>
-          <View style={styles.inputContainer}>
-            <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
-            <Text keyboard style={styles.textInput}>{selectedRoommate.whatsapp}</Text>
-          </View>
-
         </View>
       }
     </>
@@ -444,12 +446,32 @@ const styles = StyleSheet.create({
     height: 30,
     zIndex: 10000,
   },
-  saveButton: {
+
+  updateButton: {
     width: '40%', 
     height: '40px',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#401F02',
+    backgroundColor: 'green',
+    borderRadius: '20px',
+    borderColor: 'black',
+    borderWidth: '1px',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 10,
+      height: 10,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 7,
+    elevation: 11,
+  },
+
+  deleteButton: {
+    width: '40%', 
+    height: '40px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#8B0000',
     borderRadius: '20px',
     borderColor: 'black',
     borderWidth: '1px',

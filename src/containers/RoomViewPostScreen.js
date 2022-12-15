@@ -72,7 +72,7 @@ const {
           return(
             <View key={index} style= {styles.cardContainer}>
               <View style={{ display: 'flex', flexDirection: 'row', width: '100%', overflow: 'scroll', gap: '10px', paddingBottom: '10px' }}>
-               {item.roomPic.map((pic, index) => {
+               {item?.roomPic?.map((pic, index) => {
                 return(
                   <Image key={index} resizeMode='cover' style={{aspectRatio: 1, width: '250px', borderWidth: '2px', borderRadius: '15px' }} source={{ uri: pic }}></Image>
                 )

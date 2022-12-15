@@ -13,6 +13,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { v4 as uuid } from 'uuid';
+import RoommateViewPostScreen from './RoommateViewPostScreen'
 
 const AddRoommateScreen = () => {
 
@@ -122,8 +123,9 @@ async function isEmptyObject(obj) {
           try {
             //Add user details to firestore
             setDoc(doc(db, "roommates", body.roommateID), body).then(() => {
-              console.log('added roommate')
-              navigation.navigate("HomeScreen")
+              console.log('Post added')
+              alert('Post added')
+              navigation.navigate('RoommateViewPostScreen')
               //Pass user data to global state
             })
           } catch (e) {
@@ -189,6 +191,11 @@ async function isEmptyObject(obj) {
       <View style={styles.inputContainer}>
         <Text style={{paddingVertical: 5}}>Description:</Text>
         <TextInput style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, description: e.target.value }) }} value={roommateDetails.description}></TextInput>
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
+        <TextInput keyboardType='numeric' style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, whatsapp: e.target.value }) }} value={roommateDetails.whatsapp}></TextInput>
       </View>
       
       <View style={styles.details}>
@@ -275,10 +282,7 @@ async function isEmptyObject(obj) {
         </View>
       </View>
 
-      <View style={styles.inputContainer}>
-        <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
-        <TextInput keyboardType='numeric' style={styles.textInput} onChange={(e) => { setRoommateDetails({...roommateDetails, whatsapp: e.target.value }) }} value={roommateDetails.whatsapp}></TextInput>
-      </View>
+      
 
       <TouchableOpacity onPress={()=> { handleAddRoommate() }} style={styles.saveButton}>
         <Text style={{color:'#FFFFFF', fontSize: '16px', fontWeight:'400'}}>Add Roommate</Text>

@@ -131,8 +131,9 @@ async function isEmptyObject(obj) {
             //Add user details to firestore
             console.log(body)
             setDoc(doc(db, "room", body.roomID), body).then(() => {
-              console.log('added room')
-              navigation.navigate("HomeScreen")
+              console.log('Post added')
+              alert('Post added')
+              navigation.navigate("RoomViewPostScreen")
               //Pass user data to global state
             })
           } catch (e) {
@@ -175,7 +176,10 @@ async function isEmptyObject(obj) {
         <Text style={{paddingVertical: 5}}>Description:</Text>
         <TextInput style={styles.textInput} onChange={(e) => { setRoomDetails({...roomDetails, description: e.target.value }) }} value={roomDetails.description}></TextInput>
       </View>
-      
+      <View style={styles.inputContainer}>
+          <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
+          <TextInput style={styles.textInput} onChange={(e) => { setRoomDetails({...roomDetails, whatsapp: e.target.value }) }} value={roomDetails.whatsapp}></TextInput>
+      </View>
       <View style={styles.details}>
         <Text>Room Preferences</Text>
         <View style={[styles.inputContainer, { zIndex: 999 }]}>

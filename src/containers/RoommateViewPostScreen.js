@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         display: "flex",
+        overflow: 'scroll',
         paddingVertical: "30px",
         alignItems: 'center',
         gap: '30px'
