@@ -273,42 +273,51 @@ const {
             :
 
             <View style={styles.container}>
-            
-              <Image source={{ uri: roomDetails.uri }} resizeMode='cover' style={{aspectRatio: 1, width: '100px', height: '100px', borderWidth: '2px', borderRadius: '15px' }}/>
-                
-
+              <View style={{ display: 'flex', flexDirection: 'row', gap: '10px', width: '100%', overflow: 'scroll', paddingHorizontal: '15px' }}>
+                {!roomPic && roomDetails.roomPic.map((item, index) => {
+                  return(
+                    <Image key={index} source={{ uri: item }} resizeMode='cover' style={{aspectRatio: 1, width: '100px', height: '100px', borderWidth: '2px', borderRadius: '15px' }}/>
+                  )
+                })}
+                {roomPic && roomPic.map((item, index) => {
+                  return(
+                  <Image key={index} source={{ uri: item.uri }} resizeMode='cover' style={{aspectRatio: 1, width: '100px', height: '100px', borderWidth: '2px', borderRadius: '15px' }}/>
+                  )
+                })
+                }
+              </View> 
               <View style={styles.inputContainer}>
                 <Text style={{paddingVertical: 5}}>Title:</Text>
-                <Text style={styles.textInput}>{roomDetails.title}</Text>
+                <Text style={styles.viewTextInput}>{roomDetails.title}</Text>
               </View>
 
               <View style={styles.inputContainer}>
                 <Text style={{paddingVertical: 5}}>Price per Month:</Text>
-                <Text style={styles.textInput}>{roomDetails.price}</Text>
+                <Text style={styles.viewTextInput}>{roomDetails.price}</Text>
               </View>
 
               <View style={styles.inputContainer}>
                 <Text style={{paddingVertical: 5}}>Description:</Text>
-                <Text style={styles.textInput}>{roomDetails.description}</Text>
+                <Text style={styles.viewTextInput}>{roomDetails.description}</Text>
               </View>
               <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
-                  <Text style={styles.textInput}>{roomDetails.whatsapp}</Text>
+                  <Text style={styles.viewTextInput}>{roomDetails.whatsapp}</Text>
               </View>
               
               <View style={styles.details}>
                 <Text>Room Preferences</Text>
                 <View style={[styles.inputContainer, { zIndex: 999 }]}>
                 <Text style={{paddingVertical: 5}}>Room Type:</Text>
-                <Text style={styles.textInput}>{roomDetails.roomType}</Text>
+                <Text style={styles.viewTextInput}>{roomDetails.roomType}</Text>
                 </View>
                 <View style={[styles.inputContainer, { zIndex: 998 }]}>
                   <Text style={{paddingVertical: 5}}>Furnish Type:</Text>
-                  <Text style={styles.textInput}>{roomDetails.furnishType}</Text>
+                  <Text style={styles.viewTextInput}>{roomDetails.furnishType}</Text>
                 </View>
                 <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>Number of People:</Text>
-                  <Text style={styles.textInput} >{roomDetails.numberOfPeople}</Text>
+                  <Text style={styles.viewTextInput} >{roomDetails.numberOfPeople}</Text>
                 </View>
               </View>
 
@@ -316,15 +325,15 @@ const {
                 <Text>Area Preferences</Text>
                 <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>Building:</Text>
-                  <Text style={styles.textInput} >{roomDetails.building}</Text>
+                  <Text style={styles.viewTextInput} >{roomDetails.building}</Text>
                 </View>
                 <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>Address:</Text>
-                  <Text style={styles.textInput} >{roomDetails.address}</Text>
+                  <Text style={styles.viewTextInput} >{roomDetails.address}</Text>
                 </View>
                 <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>City:</Text>
-                  <Text style={styles.textInput}>{roomDetails.city}</Text>
+                  <Text style={styles.viewTextInput}>{roomDetails.city}</Text>
                 </View>
               </View>
 
@@ -332,23 +341,23 @@ const {
                 <Text>Other Preferences</Text>
                 <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>Household Number:</Text>
-                  <Text style={styles.textInput}>{roomDetails.householdNumber}</Text>
+                  <Text style={styles.viewTextInput}>{roomDetails.householdNumber}</Text>
                 </View>
                 <View style={[styles.inputContainer, { zIndex: 999 }]}>
                   <Text style={{paddingVertical: 5}}>Preferred Gender:</Text>
-                  <Text style={styles.textInput}>{roomDetails.preferredGender}</Text>
+                  <Text style={styles.viewTextInput}>{roomDetails.preferredGender}</Text>
                 </View>
                 <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>Preferred Age:</Text>
-                  <Text style={styles.textInput}>{roomDetails.preferredAge}</Text>
+                  <Text style={styles.viewTextInput}>{roomDetails.preferredAge}</Text>
                 </View>
                 <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>Occupation Status:</Text>
-                  <Text style={styles.textInput}>{roomDetails.occupationStatus}</Text>
+                  <Text style={styles.viewTextInput}>{roomDetails.occupationStatus}</Text>
                 </View>
                 <View style={styles.inputContainer}>
                   <Text style={{paddingVertical: 5}}>Preferred Pet:</Text>
-                  <Text style={styles.textInput}>{roomDetails.preferredPet}</Text>
+                  <Text style={styles.viewTextInput}>{roomDetails.preferredPet}</Text>
                 </View>
               </View>
             </View>
@@ -444,6 +453,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.36,
     shadowRadius: 7,
     elevation: 11,
+  },
+
+  viewTextInput:{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    paddingLeft: 5,
+    backgroundColor: '#D6B598',
+    height: 30
   },
 
   

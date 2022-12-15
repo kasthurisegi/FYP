@@ -303,51 +303,51 @@ const pickImage = async () => {
 
           <View style={styles.inputContainer}>
             <Text style={{paddingVertical: 5}}>Title:</Text>
-            <Text style={styles.textInput}>{selectedRoommate.title}</Text>
+            <Text style={styles.viewTextInput}>{selectedRoommate.title}</Text>
           </View>
 
           <View style={styles.inputContainer}>
             <Text style={{paddingVertical: 5}}>Name:</Text>
-            <Text style={styles.textInput}>{selectedRoommate.name}</Text>
+            <Text style={styles.viewTextInput}>{selectedRoommate.name}</Text>
           </View>
 
           <View style={styles.inputContainer}>
             <Text style={{paddingVertical: 5}}>Age:</Text>
-            <Text keyboard style={styles.textInput}>{selectedRoommate.age}</Text>
+            <Text keyboard style={styles.viewTextInput}>{selectedRoommate.age}</Text>
           </View>
 
           <View style={[styles.inputContainer, { zIndex: 999 }]}>
             <Text style={{paddingVertical: 5}}>Gender:</Text>
-            <Text keyboard style={styles.textInput}>{selectedRoommate.gender}</Text>
+            <Text keyboard style={styles.viewTextInput}>{selectedRoommate.gender}</Text>
           </View>
 
           <View style={styles.inputContainer}>
             <Text style={{paddingVertical: 5}}>Price per Month:</Text>
-            <Text style={styles.textInput}>{selectedRoommate.price}</Text>
+            <Text style={styles.viewTextInput}>{selectedRoommate.price}</Text>
           </View>
 
           <View style={styles.inputContainer}>
             <Text style={{paddingVertical: 5}}>Description:</Text>
-            <Text style={styles.textInput}>{selectedRoommate.description}</Text>
+            <Text style={styles.viewTextInput}>{selectedRoommate.description}</Text>
           </View>
           <View style={styles.inputContainer}>
             <Text style={{paddingVertical: 5}}>Whatsapp No:</Text>
-            <Text keyboard style={styles.textInput}>{selectedRoommate.whatsapp}</Text>
+            <Text keyboard style={styles.viewTextInput}>{selectedRoommate.whatsapp}</Text>
           </View>
           
           <View style={styles.details}>
             <Text>Room Preferences</Text>
             <View style={[styles.inputContainer, { zIndex: 999 }]}>
             <Text style={{paddingVertical: 5}}>Room Type:</Text>
-            <Text style={styles.textInput}>{selectedRoommate.roomType}</Text>
+            <Text style={styles.viewTextInput}>{selectedRoommate.roomType}</Text>
             </View>
             <View style={[styles.inputContainer, { zIndex: 998 }]}>
               <Text style={{paddingVertical: 5}}>Furnish Type:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.furnishType}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.furnishType}</Text>
             </View>
             <View style={styles.inputContainer}>
               <Text style={{paddingVertical: 5}}>Number of People:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.numberOfPeople}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.numberOfPeople}</Text>
             </View>
           </View>
 
@@ -355,15 +355,15 @@ const pickImage = async () => {
             <Text>Area Preferences</Text>
             <View style={styles.inputContainer}>
               <Text style={{paddingVertical: 5}}>Building:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.building}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.building}</Text>
             </View>
             <View style={styles.inputContainer}>
               <Text style={{paddingVertical: 5}}>City:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.address}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.address}</Text>
             </View>
             <View style={styles.inputContainer}>
               <Text style={{paddingVertical: 5}}>State:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.city}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.city}</Text>
             </View>
           </View>
 
@@ -371,23 +371,23 @@ const pickImage = async () => {
             <Text>Other Preferences</Text>
             <View style={styles.inputContainer}>
               <Text style={{paddingVertical: 5}}>Household Number:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.householdNumber}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.householdNumber}</Text>
             </View>
             <View style={[styles.inputContainer, { zIndex: 999 }]}>
               <Text style={{paddingVertical: 5}}>Preferred Gender:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.preferredGender}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.preferredGender}</Text>
             </View>
             <View style={styles.inputContainer}>
               <Text style={{paddingVertical: 5}}>Preferred Age:</Text>
-              <Text keyboard style={styles.textInput}>{selectedRoommate.preferredAge}</Text>
+              <Text keyboard style={styles.viewTextInput}>{selectedRoommate.preferredAge}</Text>
             </View>
             <View style={styles.inputContainer}>
               <Text style={{paddingVertical: 5}}>Occupation Status:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.occupationStatus}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.occupationStatus}</Text>
             </View>
             <View style={styles.inputContainer}>
               <Text style={{paddingVertical: 5}}>Preferred Pet:</Text>
-              <Text style={styles.textInput}>{selectedRoommate.preferredPet}</Text>
+              <Text style={styles.viewTextInput}>{selectedRoommate.preferredPet}</Text>
             </View>
           </View>
         </View>
@@ -483,6 +483,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.36,
     shadowRadius: 7,
     elevation: 11,
+  },
+
+  viewTextInput:{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    paddingLeft: 5,
+    backgroundColor: '#D6B598',
+    height: 30
   },
 })
 
